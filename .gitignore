@@ -1,0 +1,16 @@
+venv/
+env/
+ENV/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.vscode/
+.idea/
+*.log
+.DS_Store
+bin/
+obj/
+deploy.zip
