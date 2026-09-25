@@ -1,0 +1,396 @@
+/* ===== Reset básico ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #2f2f2f;
+  line-height: 1.5;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== Botones ===== */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  background: transparent;
+}
+
+/* ===== Barra de navegación (primera .fila) ===== */
+.fila:first-of-type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+}
+
+.fila:first-of-type h2 {
+  color: #3f6b4f;
+}
+
+.fila:first-of-type ul {
+  display: flex;
+  gap: 30px;
+}
+
+.fila:first-of-type ul li button {
+  color: #333;
+  font-weight: 400;
+  padding: 4px 8px;
+}
+
+.fila:first-of-type button:nth-last-child(2) {
+  border: 1px solid #3f6b4f;
+  color: #3f6b4f;
+}
+
+.fila:first-of-type button:last-child {
+  background: #3f6b4f;
+  color: #fff;
+}
+
+/* ===== Secciones con imagen (.fila con .l y .r) ===== */
+.fila {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 60px;
+}
+
+.l, .r {
+  flex: 1;
+}
+
+.l img, .r img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.l > p:first-child, .r > p:first-child {
+  display: inline-block;
+  background: #eef1ec;
+  color: #5a7a63;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-size: 34px;
+  margin-bottom: 15px;
+  color: #1f1f1f;
+}
+
+.l > p:nth-of-type(2), .r > p:nth-of-type(2) {
+  background: none;
+  padding: 0;
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.l button:first-of-type {
+  background: #3f6b4f;
+  color: #fff;
+  margin-right: 15px;
+}
+
+.l button:last-of-type {
+  color: #3f6b4f;
+}
+
+/* ===== Sección de características (h1, h2, p sueltos) ===== */
+body > h1 {
+  text-align: center;
+  font-size: 30px;
+  margin-top: 50px;
+  padding: 0 20px;
+}
+
+body > h1 + p {
+  text-align: center;
+  color: #666;
+  max-width: 600px;
+  margin: 15px auto 40px;
+}
+
+body > h2 {
+  max-width: 700px;
+  margin: 25px auto 8px;
+  padding: 0 20px;
+  color: #1f1f1f;
+}
+
+body > h2 + p {
+  max-width: 700px;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  color: #666;
+  font-size: 15px;
+}
+
+/* ===== Etiqueta reutilizable (badges tipo "Motivación positiva") ===== */
+.etiqueta {
+  display: inline-block;
+  background: #f7e6de;
+  color: #b06a48;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+/* ===== Objetivos populares ===== */
+.objetivos-populares {
+  text-align: center;
+  padding: 60px 20px 20px;
+}
+
+.objetivos-populares h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.objetivos-populares > p {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.lista-objetivos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.objetivo {
+  background: #f2f2f2;
+  color: #444;
+  padding: 10px 22px;
+}
+
+.objetivo.activo {
+  background: #3f6b4f;
+  color: #fff;
+}
+
+/* ===== Motivación positiva ===== */
+.motivacion-positiva {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 60px;
+  flex-wrap: wrap;
+}
+
+.motivacion-texto {
+  flex: 1;
+  min-width: 280px;
+}
+
+.motivacion-texto h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.motivacion-texto p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.estadisticas {
+  display: flex;
+  gap: 40px;
+}
+
+.numero {
+  display: block;
+  font-size: 24px;
+  color: #c96a3f;
+}
+
+.descripcion {
+  font-size: 13px;
+  color: #888;
+}
+
+.insignias-card {
+  flex: 1;
+  min-width: 280px;
+  background: #f7f7f5;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.insignias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.insignias-header a {
+  font-size: 13px;
+  color: #3f6b4f;
+}
+
+.lista-insignias {
+  display: flex;
+  gap: 15px;
+}
+
+.insignia {
+  flex: 1;
+  background: #fff;
+  border-radius: 12px;
+  text-align: center;
+  padding: 15px 10px;
+}
+
+.icono-insignia {
+  font-size: 24px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.insignia strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.insignia .dia {
+  font-size: 11px;
+  color: #999;
+}
+
+/* ===== Acompañamiento grupal ===== */
+.acompanamiento-grupal {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 60px;
+  flex-wrap: wrap;
+}
+
+.imagen-grupo {
+  flex: 1;
+  min-width: 280px;
+}
+
+.imagen-grupo img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.acompanamiento-texto {
+  flex: 1;
+  min-width: 280px;
+}
+
+.acompanamiento-texto h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.acompanamiento-texto p {
+  color: #666;
+}
+
+/* ===== Pie de página ===== */
+.pie-pagina {
+  background: linear-gradient(135deg, #2f4a3a, #3f6b4f);
+  color: #e7ede8;
+  padding: 50px 60px 20px;
+  margin-top: 40px;
+}
+
+.pie-contenido {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.pie-marca {
+  max-width: 320px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.punto-logo {
+  width: 10px;
+  height: 10px;
+  background: #e07a5f;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pie-marca p {
+  font-size: 14px;
+  color: #cdd8d1;
+}
+
+.pie-enlaces {
+  display: flex;
+  gap: 60px;
+}
+
+.columna-enlaces h3 {
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.columna-enlaces ul li {
+  margin-bottom: 8px;
+}
+
+.columna-enlaces ul li a {
+  font-size: 14px;
+  color: #cdd8d1;
+}
+
+.pie-inferior {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #b7c4bb;
+}
+
+.enlaces-legales {
+  display: flex;
+  gap: 20px;
+}
