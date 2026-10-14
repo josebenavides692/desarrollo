@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moken - Crear cuenta</title>
+  <p id="mensaje-registro" role="status" aria-live="polite"></p>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="registro.css">
 </head>
@@ -18,7 +19,7 @@
     <h1>Comienza tu proceso</h1>
     <p class="reg-intro">Crea tu cuenta y avanza a tu ritmo, un día a la vez.</p>
 
-    <form action="#" method="post">
+    <form id="registro-form">
       <div class="campo">
         <label for="nombre">Nombre</label>
         <input id="nombre" name="nombre" type="text" autocomplete="name" required>
@@ -47,9 +48,9 @@
 
       <button type="submit" class="boton-principal">Crear cuenta</button>
 
-      <p class="reg-pie">¿Ya tienes cuenta? <a href="principal.html">Iniciar sesión</a></p>
+      <p class="reg-pie">¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
     </form>
   </main>
-
+  <script src="registro.js"></script>
 </body>
 </html>
