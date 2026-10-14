@@ -1,0 +1,150 @@
+/* Estilos de la página de registro de Moken.
+   Paleta tomada de style.css: verde #3f6b4f, etiqueta #eef1ec / #5a7a63, fondo suave #f7f7f5. */
+
+:root {
+  --verde: #3f6b4f;
+  --verde-oscuro: #2f4a3a;
+  --fondo: #f7f7f5;
+  --texto-suave: #666;
+  --titulo: #1f1f1f;
+  --borde: #d8d6cd;
+}
+
+.pagina-registro {
+  background: var(--fondo);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* ---------- Cabecera ---------- */
+.reg-cabecera {
+  max-width: 460px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.reg-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--verde);
+}
+
+/* ---------- Tarjeta ---------- */
+.reg-tarjeta {
+  max-width: 460px;
+  margin: 0 auto 40px;
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 15px;
+}
+
+.reg-lema {
+  display: inline-block;
+  background: #eef1ec;
+  color: #5a7a63;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+}
+
+.reg-tarjeta h1 {
+  font-size: 30px;
+  line-height: 1.2;
+  color: var(--titulo);
+  margin-bottom: 10px;
+}
+
+.reg-intro {
+  color: var(--texto-suave);
+  margin-bottom: 24px;
+}
+
+/* ---------- Campos ---------- */
+.campo {
+  margin-bottom: 18px;
+}
+
+.campo label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.campo input[type="text"],
+.campo input[type="email"],
+.campo input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit;
+  background: #fff;
+  border: 1.5px solid var(--borde);
+  border-radius: 10px;
+}
+
+.campo input:focus-visible,
+.boton-principal:focus-visible {
+  outline: 3px solid rgba(63, 107, 79, 0.3);
+  outline-offset: 2px;
+  border-color: var(--verde);
+}
+
+.ayuda {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+/* Checkbox */
+.campo-check {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 10px;
+  align-items: start;
+}
+
+.campo-check input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: var(--verde);
+}
+
+.campo-check label {
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ---------- Botón y pie ---------- */
+.boton-principal {
+  width: 100%;
+  font-family: inherit;
+  color: #fff;
+  background: var(--verde);
+}
+
+.boton-principal:hover {
+  background: var(--verde-oscuro);
+}
+
+.reg-pie {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--texto-suave);
+}
+
+.reg-pie a {
+  color: var(--verde);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+  .reg-tarjeta {
+    padding: 24px 18px;
+  }
+}
