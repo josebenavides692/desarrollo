@@ -1,0 +1,93 @@
+
+/* Perfil de usuario */
+
+.perfil-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 6%;
+}
+
+.perfil-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.perfil-header a {
+    text-decoration: none;
+}
+
+.perfil-container {
+    width: min(90%, 680px);
+    margin: 40px auto;
+}
+
+.perfil-card {
+    padding: 30px;
+    border: 1px solid #dddddd;
+    border-radius: 14px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.perfil-card h1 {
+    margin-top: 0;
+}
+
+#perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#perfil-form label {
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+#perfil-form input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 7px;
+    font: inherit;
+}
+
+#perfil-form input:focus {
+    outline: 2px solid #555555;
+    outline-offset: 2px;
+}
+
+#perfil-form button {
+    margin-top: 18px;
+    padding: 13px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+}
+
+#perfil-form button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.perfil-footer {
+    padding: 20px;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .perfil-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .perfil-card {
+        padding: 20px;
+    }
+}
