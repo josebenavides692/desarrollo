@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moken - Mi objetivo</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f6f2;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            color: #426b54;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        main {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        h2 {
+            font-size: 23px;
+        }
+
+        p {
+            color: #777;
+        }
+
+        .opciones {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        button, .opcion {
+            padding: 13px 8px;
+            border: 1px solid #e5e3dd;
+            border-radius: 10px;
+            background: #f8f7f3;
+            cursor: pointer;
+        }
+
+        button.seleccionado {
+            background: #e4eee7;
+            border: 2px solid #668b73;
+        }
+
+        .fila {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0 25px;
+        }
+
+        .fila button {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .privacidad {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f8f7f3;
+            border-radius: 10px;
+        }
+
+        .siguiente {
+            background: #668b73;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        #mensaje {
+            margin-top: 15px;
+            color: #426b54;
+            font-weight: bold;
+        }
+
+        @media (max-width: 480px) {
+            .opciones {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            main {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>● Moken</header>
+
+<main>
+    <p>PASO 2 DE 4 · TU OBJETIVO</p>
+
+    <h2>¿Qué te gustaría trabajar hoy?</h2>
+    <p>Selecciona el hábito que deseas controlar.</p>
+
+    <div class="opciones" id="habitos">
+        <button>Videojuegos</button>
+        <button>Pornografía</button>
+        <button>Redes sociales</button>
+        <button>Nicotina</button>
+        <button>Alcohol</button>
+        <button>Apuestas</button>
+        <button>Cafeína</button>
+        <button>Otro</button>
+    </div>
+
+    <h3>¿Cuál es tu intención principal?</h3>
+
+    <div class="fila" id="intenciones">
+        <button>Dejarlo completamente</button>
+        <button>Reducirlo</button>
+        <button>Hacer seguimiento</button>
+    </div>
+
+    <h3>Primer hito de tiempo</h3>
+
+    <div class="fila" id="metas">
+        <button>7 días</button>
+        <button>14 días</button>
+        <button>30 días</button>
+        <button>60 días</button>
+        <button>90 días</button>
+    </div>
+
+    <h3>Configuración de privacidad</h3>
+
+    <div class="privacidad">
+        <div>
+            <strong>Proceso privado</strong>
+            <p>Tus notas y estadísticas serán privadas.</p>
+        </div>
+        <input type="checkbox" id="privado" checked>
+    </div>
+
+    <button class="siguiente" onclick="continuar()">
+        Siguiente paso →
+    </button>
+
+    <p id="mensaje"></p>
+</main>
+
+<script>
+    function activarSeleccion(id) {
+        const botones = document.querySelectorAll("#" + id + " button");
+
+        botones.forEach(boton => {
+            boton.addEventListener("click", function() {
+                botones.forEach(b => b.classList.remove("seleccionado"));
+                this.classList.add("seleccionado");
+            });
+        });
+    }
+
+    activarSeleccion("habitos");
+    activarSeleccion("intenciones");
+    activarSeleccion("metas");
+
+    function continuar() {
+        const habito = document.querySelector("#habitos .seleccionado");
+        const intencion = document.querySelector("#intenciones .seleccionado");
+        const meta = document.querySelector("#metas .seleccionado");
+
+        if (!habito || !intencion || !meta) {
+            document.getElementById("mensaje").textContent =
+                "Selecciona un hábito, una intención y una meta.";
+            return;
+        }
+
+        const datos = {
+            habito: habito.textContent,
+            intencion: intencion.textContent,
+            meta: meta.textContent,
+            privado: document.getElementById("privado").checked
+        };
+
+        document.getElementById("mensaje").textContent =
+            "¡Perfecto! Objetivo seleccionado: " +
+            datos.habito + ", meta de " + datos.meta + ".";
+    }
+</script>
+
+</body>
+</html>
