@@ -71,6 +71,9 @@ class RegistroUsuario(BaseModel):
     correo: str = Field(min_length=5, max_length=254)
     clave: str = Field(min_length=8, max_length=128)
 
+class LoginUsuario(BaseModel):
+    correo: str = Field(min_length=5, max_length=254)
+    clave: str = Field(min_length=8, max_length=128)
 
 class DatosPerfil(BaseModel):
     nombre: str = Field(min_length=2, max_length=100)
