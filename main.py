@@ -12,7 +12,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.middleware.sessions import SessionMiddleware
-
+from fastapi.responses import FileResponse
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = Path(os.getenv("DATABASE_PATH", str(BASE_DIR / "usuarios.db")))
@@ -162,7 +162,7 @@ def usuario_actual(request: Request):
 
 @app.get("/")
 def home():
-    return {"mensaje": "Mi API está funcionando"}
+    return FileResponse(BASE_DIR / "principal.html")
 
 
 @app.get("/eventos")
@@ -282,3 +282,57 @@ def actualizar_perfil(datos: DatosPerfil, request: Request):
 def cerrar_sesion(request: Request):
     request.session.clear()
     return {"mensaje": "Sesión cerrada correctamente."}
+
+@app.get("/principal.html")
+def pagina_principal():
+    return FileResponse(BASE_DIR / "principal.html")
+
+
+@app.get("/registro.html")
+def pagina_registro():
+    return FileResponse(BASE_DIR / "registro.html")
+
+
+@app.get("/login.html")
+def pagina_login():
+    return FileResponse(BASE_DIR / "login.html")
+
+
+@app.get("/perfil.html")
+def pagina_perfil():
+    return FileResponse(BASE_DIR / "perfil.html")
+
+
+@app.get("/style.css")
+def estilo_principal():
+    return FileResponse(BASE_DIR / "style.css")
+
+
+@app.get("/registro.css")
+def estilo_registro():
+    return FileResponse(BASE_DIR / "registro.css")
+
+
+@app.get("/perfil.css")
+def estilo_perfil():
+    return FileResponse(BASE_DIR / "perfil.css")
+
+
+@app.get("/registro.js")
+def javascript_registro():
+    return FileResponse(BASE_DIR / "registro.js")
+
+
+@app.get("/login.js")
+def javascript_login():
+    return FileResponse(BASE_DIR / "login.js")
+
+
+@app.get("/perfil.js")
+def javascript_perfil():
+    return FileResponse(BASE_DIR / "perfil.js")
+
+
+@app.get("/code.js")
+def javascript_principal():
+    return FileResponse(BASE_DIR / "code.js")
