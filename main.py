@@ -68,7 +68,6 @@ app.add_middleware(
 
 
 class RegistroUsuario(BaseModel):
-    nombre: str = Field(min_length=2, max_length=100)
     correo: str = Field(min_length=5, max_length=254)
     clave: str = Field(min_length=8, max_length=128)
 
@@ -208,7 +207,7 @@ def registrar_usuario(datos: RegistroUsuario):
 
 
 @app.post("/login")
-def iniciar_sesion(datos: RegistroUsuario, request: Request):
+def iniciar_sesion(datos: LoginUsuario, request: Request):
     correo = validar_correo(datos.correo)
 
     with conectar_db() as conexion:
