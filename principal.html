@@ -8,31 +8,31 @@
 <body>
 
   <div class="fila">
-    <h2>Moken</h2>
-    <ul>
-      <li><button>Que es</button></li>
-      <li><button>Beneficios</button></li>
-      <li><button>Como funciona</button></li>
-      <li><button>Comunidad</button></li>
-    </ul>
-    <button>Iniciar sesion</button>
-    <a href="registro.html"><button>Registrarse</button></a>
-  </div>
+  <h2>Moken</h2>
+  <ul>
+    <li><button onclick="location.href='#que-es'">Que es</button></li>
+    <li><button onclick="location.href='#beneficios'">Beneficios</button></li>
+    <li><button onclick="location.href='#como-funciona'">Como funciona</button></li>
+    <li><button onclick="location.href='#comunidad'">Comunidad</button></li>
+  </ul>
+    <button onclick="location.href='login.html'">Iniciar sesion</button>
+    <button onclick="location.href='registro.html'">Registrarse</button>
+    </div>
 
   <div class="fila">
     <div class="l">
       <p>Acompañamiento consciente</p>
       <h1 class="title">Un dia a la vez, con el ritmo que tu elijas</h1>
       <p>Moken te ayuda a reducir, controlar o despedirte de habitos, sustancias o comportamientos que ya no te suman.</p>
-      <button>Comienza tu proceso</button>
-      <button>Ver como funciona</button>
+      <button onclick="location.href='registro.html'">Comienza tu proceso</button>
+      <button onclick="location.href='#como-funciona'">Ver como funciona</button>
     </div>
     <div class="r">
       <img src="https://placehold.co/400x400" alt="imagen meditacion">
     </div>
   </div>
 
-  <div class="fila">
+  <div class="fila" id="que-es">
     <div class="l">
       <img src="https://placehold.co/400x300" alt="imagen manos con planta">
     </div>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <h1>¿Por qué elegir RENACER?</h1>
+  <h1 id="beneficios">¿Por qué elegir RENACER?</h1>
   <p>
       Diseñamos cada función pensando en que el camino de mejora
       es único y requiere herramientas amables.
@@ -76,7 +76,7 @@
 
   <h2>Fácil y amigable</h2>
 
-  <h1>Comienza en tres sencillos pasos</h1>
+  <h1 id="como-funciona">Comienza en tres sencillos pasos</h1>
 
   <h2>1. Elige tu objetivo</h2>
   <p>
@@ -165,7 +165,7 @@
   </section>
 
   <!-- Sección: Acompañamiento grupal -->
-  <section class="acompanamiento-grupal">
+  <section class="acompanamiento-grupal" id="comunidad">
 
     <figure class="imagen-grupo">
       <img src="grupo-apoyo.png" alt="Grupo de personas apoyándose y celebrando juntas">
@@ -202,9 +202,9 @@
         <div class="columna-enlaces">
           <h3>Explorar</h3>
           <ul>
-            <li><a href="#">Cómo funciona</a></li>
-            <li><a href="#">Beneficios</a></li>
-            <li><a href="#">Grupos</a></li>
+            <li><a href="#como-funciona">Cómo funciona</a></li>
+            <li><a href="#beneficios">Beneficios</a></li>
+            <li><a href="#comunidad">Grupos</a></li>
           </ul>
         </div>
 
