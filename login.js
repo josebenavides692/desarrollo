@@ -1,19 +1,31 @@
-// Lee la sesión que guardó el login
-let sesion = JSON.parse(localStorage.getItem("sesionMoken"));
+document.getElementById("login-form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-if (!sesion) {
-    // Si nadie inició sesión, lo mandamos al login
-    window.location.href = "login.html";
-} else {
-    // Muestra el nombre en lugar de "Mi cuenta"
-    document.getElementById("nombre-usuario").textContent = sesion.nombre;
-}
+    let correo = document.getElementById("correo").value.trim().toLowerCase();
+    let clave = document.getElementById("clave").value;
+    let mensaje = document.getElementById("mensaje-login");
 
-// Cerrar sesión: borra la sesión (el enlace se encarga de llevar a la otra página)
-let botones = document.querySelectorAll(".cerrar-sesion");
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-for (let i = 0; i < botones.length; i++) {
-    botones[i].addEventListener("click", function() {
-        localStorage.removeItem("sesionMoken");
+    let usuarioEncontrado = usuarios.find(function(usuario) {
+        return usuario.correo === correo && usuario.clave === clave;
     });
-}
+
+    if (usuarioEncontrado) {
+        let sesion = {
+            nombre: usuarioEncontrado.nombre,
+            correo: usuarioEncontrado.correo
+        };
+
+        localStorage.setItem("sesionMoken", JSON.stringify(sesion));
+
+        mensaje.textContent = "Inicio de sesión correcto. ¡Bienvenido a Moken!";
+
+        setTimeout(function() {
+            window.location.href = "general.html";
+        }, 1000);
+
+    } else {
+        mensaje.textContent = "Correo o contraseña incorrectos.";
+    }
+});
