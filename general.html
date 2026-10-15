@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moken - Mi proceso</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="general.css">
 </head>
 <body>
 
@@ -43,7 +43,7 @@
       <ul>
         <li><a href="#" class="menu-link"><span class="menu-icono">&#128100;</span>Mi perfil</a></li>
         <li><a href="#" class="menu-link"><span class="menu-icono">&#9881;</span>Configuración</a></li>
-        <li><a href="principal.html" class="menu-link"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
+        <li><a href="principal.html" class="menu-link cerrar-sesion"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
       </ul>
     </nav>
 
@@ -59,7 +59,8 @@
       </div>
       <div class="usuario">
         <span class="avatar">&#128100;</span>
-        <span>Mi cuenta</span>
+        <span id="nombre-usuario">Mi cuenta</span>
+        <a href="principal.html" class="tag tag-habito cerrar-sesion">Cerrar sesión</a>
       </div>
     </header>
 
@@ -190,6 +191,8 @@
   </main>
 
 </div>
+
+<script src="general.js"></script>
 
 </body>
 </html>
