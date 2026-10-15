@@ -1,23 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moken</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="fila">
-  <h2>Moken</h2>
-  <ul>
-    <li><button onclick="location.href='#que-es'">Que es</button></li>
-    <li><button onclick="location.href='#beneficios'">Beneficios</button></li>
-    <li><button onclick="location.href='#como-funciona'">Como funciona</button></li>
-    <li><button onclick="location.href='#comunidad'">Comunidad</button></li>
-  </ul>
-    <button onclick="location.href='login.html'">Iniciar sesion</button>
-    <button onclick="location.href='registro.html'">Registrarse</button>
-    </div>
+    <h2>Moken</h2>
+    <ul>
+      <li><button onclick="location.href='#que-es'">Que es</button></li>
+      <li><button onclick="location.href='#beneficios'">Beneficios</button></li>
+      <li><button onclick="location.href='#como-funciona'">Como funciona</button></li>
+      <li><button onclick="location.href='#comunidad'">Comunidad</button></li>
+    </ul>
+
+    <span id="bienvenida"></span>
+    <button id="boton-login" onclick="location.href='login.html'">Iniciar sesion</button>
+    <button id="boton-registro" onclick="location.href='registro.html'">Registrarse</button>
+    <button id="boton-salir" hidden>Cerrar sesión</button>
+  </div>
 
   <div class="fila">
     <div class="l">
@@ -44,57 +49,32 @@
   </div>
 
   <h1 id="beneficios">¿Por qué elegir RENACER?</h1>
-  <p>
-      Diseñamos cada función pensando en que el camino de mejora
-      es único y requiere herramientas amables.
-  </p>
+  <p>Diseñamos cada función pensando en que el camino de mejora es único y requiere herramientas amables.</p>
 
   <h2>Privacidad total</h2>
-  <p>
-      Tus datos están encriptados y tú decides si compartes tu
-      progreso con un mentor, amigos o lo mantienes 100% privado.
-  </p>
+  <p>Tus datos están encriptados y tú decides si compartes tu progreso con un mentor, amigos o lo mantienes 100% privado.</p>
 
   <h2>Seguimiento personalizado</h2>
-  <p>
-      Configura tus propias metas y plazos. Elige si quieres
-      dejarlo del todo, reducir tu consumo o solo hacer un seguimiento.
-  </p>
+  <p>Configura tus propias metas y plazos. Elige si quieres dejarlo del todo, reducir tu consumo o solo hacer un seguimiento.</p>
 
   <h2>Comunidad de apoyo</h2>
-  <p>
-      Conéctate de forma anónima o visible con personas que
-      transitan tu mismo camino. Compartan rachas y consejos diarios.
-  </p>
+  <p>Conéctate de forma anónima o visible con personas que transitan tu mismo camino. Compartan rachas y consejos diarios.</p>
 
   <h2>Progreso visible</h2>
-  <p>
-      Visualiza tus logros mediante estadísticas claras,
-      calendarios interactivos y rachas positivas que celebran
-      cada día limpio.
-  </p>
+  <p>Visualiza tus logros mediante estadísticas claras, calendarios interactivos y rachas positivas que celebran cada día limpio.</p>
 
   <h2>Fácil y amigable</h2>
 
   <h1 id="como-funciona">Comienza en tres sencillos pasos</h1>
 
   <h2>1. Elige tu objetivo</h2>
-  <p>
-      Selecciona el hábito o sustancia que deseas moderar o dejar.
-      Puedes fijar una meta personalizada.
-  </p>
+  <p>Selecciona el hábito o sustancia que deseas moderar o dejar. Puedes fijar una meta personalizada.</p>
 
   <h2>2. Registra tu día a día</h2>
-  <p>
-      Con un solo toque indica si lograste tu meta hoy.
-      Añade notas si tuviste un día retador.
-  </p>
+  <p>Con un solo toque indica si lograste tu meta hoy. Añade notas si tuviste un día retador.</p>
 
   <h2>3. Observa tu progreso</h2>
-  <p>
-      Gana medallas por tus logros, observa crecer tu racha
-      y comparte el éxito con tu grupo de apoyo.
-  </p>
+  <p>Gana medallas por tus logros, observa crecer tu racha y comparte el éxito con tu grupo de apoyo.</p>
 
   <section class="objetivos-populares">
     <h2>Objetivos populares</h2>
@@ -113,17 +93,11 @@
     </ul>
   </section>
 
-  <!-- Sección: Motivación positiva -->
   <section class="motivacion-positiva">
-
     <div class="motivacion-texto">
       <span class="etiqueta">Motivación positiva</span>
       <h2>Celebra cada pequeño gran avance</h2>
-      <p>
-        Moken utiliza un sistema de refuerzo positivo. Desbloquea insignias
-        ilustradas a medida que alcances metas de 7, 14, o 30 días, y mantén
-        viva tu racha como un recordatorio visual de tu constancia.
-      </p>
+      <p>Moken utiliza un sistema de refuerzo positivo. Desbloquea insignias ilustradas a medida que alcances metas de 7, 14, o 30 días, y mantén viva tu racha como un recordatorio visual de tu constancia.</p>
 
       <div class="estadisticas">
         <div class="estadistica">
@@ -161,12 +135,9 @@
         </li>
       </ul>
     </div>
-
   </section>
 
-  <!-- Sección: Acompañamiento grupal -->
   <section class="acompanamiento-grupal" id="comunidad">
-
     <figure class="imagen-grupo">
       <img src="grupo-apoyo.png" alt="Grupo de personas apoyándose y celebrando juntas">
     </figure>
@@ -174,31 +145,18 @@
     <div class="acompanamiento-texto">
       <span class="etiqueta">Acompañamiento grupal</span>
       <h2>No tienes que hacerlo en soledad</h2>
-      <p>
-        Únete a grupos de apoyo moderados, donde podrás compartir de forma
-        totalmente anónima tus luchas y victorias diarias. Encuentra mentores
-        dispuestos a escucharte y mantente motivado junto a tu círculo de
-        amigos de confianza.
-      </p>
+      <p>Únete a grupos de apoyo moderados, donde podrás compartir de forma totalmente anónima tus luchas y victorias diarias. Encuentra mentores dispuestos a escucharte y mantente motivado junto a tu círculo de amigos de confianza.</p>
     </div>
-
   </section>
 
-  <!-- Pie de página -->
   <footer class="pie-pagina">
-
     <div class="pie-contenido">
-
       <div class="pie-marca">
         <h2 class="logo"><span class="punto-logo"></span>Moken</h2>
-        <p>
-          Un camino consciente, un día a la vez.
-          Acompañamiento para tus decisiones más personales.
-        </p>
+        <p>Un camino consciente, un día a la vez. Acompañamiento para tus decisiones más personales.</p>
       </div>
 
       <nav class="pie-enlaces">
-
         <div class="columna-enlaces">
           <h3>Explorar</h3>
           <ul>
@@ -216,9 +174,7 @@
             <li><a href="#">Contacto</a></li>
           </ul>
         </div>
-
       </nav>
-
     </div>
 
     <div class="pie-inferior">
@@ -228,8 +184,23 @@
         <li><a href="#">Privacidad</a></li>
       </ul>
     </div>
-
   </footer>
+
+  <script>
+    let sesion = JSON.parse(localStorage.getItem("sesionMoken"));
+
+    if (sesion) {
+      document.getElementById("bienvenida").textContent = "Hola, " + sesion.nombre;
+      document.getElementById("boton-login").hidden = true;
+      document.getElementById("boton-registro").hidden = true;
+      document.getElementById("boton-salir").hidden = false;
+    }
+
+    document.getElementById("boton-salir").addEventListener("click", function() {
+      localStorage.removeItem("sesionMoken");
+      window.location.reload();
+    });
+  </script>
 
 </body>
 </html>

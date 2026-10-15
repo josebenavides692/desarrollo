@@ -1,35 +1,33 @@
 
-const formularioLogin = document.getElementById("login-form");
-const mensajeLogin = document.getElementById("mensaje-login");
 
-formularioLogin.addEventListener("submit", async (evento) => {
-    evento.preventDefault();
+document.getElementById("login-form").addEventListener("submit", function(event) {
+    event.preventDefault();
 
-    const correo = document.getElementById("correo").value.trim();
-    const clave = document.getElementById("clave").value;
+    let correo = document.getElementById("correo").value.trim().toLowerCase();
+    let clave = document.getElementById("clave").value;
+    let mensaje = document.getElementById("mensaje-login");
 
-    mensajeLogin.textContent = "Verificando credenciales...";
+    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
 
-    try {
-        const respuesta = await fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ correo, clave })
-        });
+    let usuarioEncontrado = usuarios.find(function(usuario) {
+        return usuario.correo === correo && usuario.clave === clave;
+    });
 
-        const resultado = await respuesta.json();
+    if (usuarioEncontrado) {
+        let sesion = {
+            nombre: usuarioEncontrado.nombre,
+            correo: usuarioEncontrado.correo
+        };
 
-        if (!respuesta.ok) {
-            throw new Error(
-                resultado.detail || "No se pudo iniciar sesión."
-            );
-        }
+        localStorage.setItem("sesionMoken", JSON.stringify(sesion));
 
-        window.location.href = "perfil.html";
-    } catch (error) {
-        mensajeLogin.textContent =
-            error.message || "No se pudo conectar con el servidor.";
+        mensaje.textContent = "Inicio de sesión correcto. ¡Bienvenido a Moken!";
+
+        setTimeout(function() {
+            window.location.href = "principal.html";
+        }, 1000);
+
+    } else {
+        mensaje.textContent = "Correo o contraseña incorrectos.";
     }
 });
