@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moken - Iniciar sesión</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="registro.css">
+</head>
+<body class="pagina-registro">
+
+    <header class="reg-cabecera">
+        <a href="principal.html" class="reg-logo">Moken</a>
+    </header>
+
+    <main class="reg-tarjeta">
+        <p class="reg-lema">Acompañamiento consciente</p>
+        <h1>Bienvenido de nuevo</h1>
+        <p class="reg-intro">Inicia sesión para continuar tu proceso.</p>
+
+        <form id="login-form">
+            <div class="campo">
+                <label for="correo">Correo electrónico</label>
+                <input id="correo" name="correo" type="email"
+                       autocomplete="email" required>
+            </div>
+
+            <div class="campo">
+                <label for="clave">Contraseña</label>
+                <input id="clave" name="clave" type="password"
+                       autocomplete="current-password" required>
+            </div>
+
+            <button type="submit" class="boton-principal">
+                Iniciar sesión
+            </button>
+
+            <p id="mensaje-login" role="status" aria-live="polite"></p>
+
+            <p class="reg-pie">
+                ¿No tienes cuenta?
+                <a href="registro.html">Crear cuenta</a>
+            </p>
+        </form>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>
