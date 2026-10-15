@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moken - Crear cuenta</title>
-  <p id="mensaje-registro" role="status" aria-live="polite"></p>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="registro.css">
 </head>
@@ -32,13 +32,15 @@
 
       <div class="campo">
         <label for="clave">Contraseña</label>
-        <input id="clave" name="clave" type="password" autocomplete="new-password" minlength="8" required aria-describedby="ayuda-clave">
-        <p class="ayuda" id="ayuda-clave">Mínimo 8 caracteres, con letras y números.</p>
+        <input id="clave" name="clave" type="password"
+               autocomplete="new-password" minlength="8" required>
+        <p class="ayuda">Mínimo 8 caracteres, con letras y números.</p>
       </div>
 
       <div class="campo">
         <label for="clave2">Confirmar contraseña</label>
-        <input id="clave2" name="clave2" type="password" autocomplete="new-password" required>
+        <input id="clave2" name="clave2" type="password"
+               autocomplete="new-password" required>
       </div>
 
       <div class="campo campo-check">
@@ -48,9 +50,14 @@
 
       <button type="submit" class="boton-principal">Crear cuenta</button>
 
-      <p class="reg-pie">¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
+      <p id="mensaje-registro" role="status" aria-live="polite"></p>
+
+      <p class="reg-pie">
+        ¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a>
+      </p>
     </form>
   </main>
+
   <script src="registro.js"></script>
 </body>
 </html>
