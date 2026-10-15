@@ -155,4 +155,3 @@ body > .etiqueta { display: table; margin: 40px auto 10px; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .contenido { padding: 25px 20px; }
 }
-  
