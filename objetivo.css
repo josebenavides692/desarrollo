@@ -1,0 +1,66 @@
+/* ===== Base ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #f8f6f1; color: #2f2f2f; padding: 30px 15px 50px; }
+a { text-decoration: none; color: inherit; }
+label { cursor: pointer; }
+input { position: absolute; opacity: 0; }  /* ocultamos el radio/checkbox y estilizamos la .caja */
+
+/* ===== Logo y tarjeta ===== */
+.logo { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 20px; font-weight: 700; margin-bottom: 25px; }
+.punto { width: 10px; height: 10px; border-radius: 50%; background: #5a7a63; }
+.tarjeta { max-width: 720px; margin: 0 auto; background: #fff; border-radius: 26px; padding: 30px 36px; box-shadow: 0 10px 35px rgba(60, 70, 50, 0.08); }
+
+/* ===== Paso ===== */
+.paso { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; padding-bottom: 16px; border-bottom: 1px solid #eeebe4; margin-bottom: 28px; }
+.paso-numero { width: 20px; height: 20px; border-radius: 50%; background: #5a7a63; color: #fff; font-size: 11px; display: flex; align-items: center; justify-content: center; }
+
+h1 { font-size: 26px; }
+.subtitulo { font-size: 14px; color: #777; margin: 6px 0 22px; }
+h2 { font-size: 14px; margin: 26px 0 12px; }
+
+/* ===== Caja base (la comparten todas las opciones) ===== */
+.caja { display: flex; align-items: center; justify-content: center; background: #f8f6f1; border: 1px solid #ece8df; border-radius: 12px; font-size: 13px; }
+.caja:hover { border-color: #c9d3c9; }
+input:checked + .caja { background: #e5eee6; border-color: #5a7a63; }
+
+/* ===== Hábitos (4 x 2) ===== */
+.habitos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.habitos .caja { flex-direction: column; gap: 12px; height: 105px; border-radius: 14px; font-weight: 500; }
+.icono { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #fff; font-style: normal; font-size: 15px; filter: grayscale(1); }
+
+/* ===== Intención ===== */
+.intencion { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.intencion .caja { justify-content: flex-start; gap: 10px; padding: 11px 14px; font-size: 12px; }
+.aro { width: 14px; height: 14px; border: 1.5px solid #777; border-radius: 50%; }
+input:checked + .caja .aro { border-color: #3f5a47; }
+
+/* ===== Hitos ===== */
+.hitos { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.hitos .caja { padding: 10px 0; font-size: 12px; }
+.hitos input:checked + .caja { background: #5a7a63; color: #fff; }
+
+/* ===== Privacidad ===== */
+.privacidad { display: flex; align-items: center; gap: 12px; background: #f8f6f1; border-radius: 12px; padding: 14px 16px; }
+.icono-privado { font-size: 18px; color: #5a7a63; }
+.privacidad div { flex: 1; }
+.privacidad strong { font-size: 13px; }
+.privacidad p { font-size: 11px; color: #777; }
+.interruptor { position: relative; }
+.barra { display: block; width: 44px; height: 24px; border-radius: 12px; background: #ccc; position: relative; transition: 0.2s; }
+.barra::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: 0.2s; }
+input:checked + .barra { background: #5a7a63; }
+input:checked + .barra::after { transform: translateX(20px); }
+
+/* ===== Botones ===== */
+.botones { display: flex; justify-content: space-between; margin-top: 28px; padding-top: 22px; border-top: 1px solid #eeebe4; }
+.boton { padding: 11px 28px; border-radius: 30px; font-size: 13px; font-weight: 600; }
+.atras { border: 1px solid #3a3a3a; }
+.siguiente { background: #5a7a63; color: #fff; }
+
+/* ===== Pantallas pequeñas ===== */
+@media (max-width: 600px) {
+  .tarjeta { padding: 22px 18px; }
+  .habitos { grid-template-columns: repeat(2, 1fr); }
+  .intencion { grid-template-columns: 1fr; }
+  .hitos { grid-template-columns: repeat(3, 1fr); }
+}
