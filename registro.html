@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moken - Crear cuenta</title>
+  <p id="mensaje-registro" role="status" aria-live="polite"></p>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="registro.css">
+</head>
+<body class="pagina-registro">
+
+  <header class="reg-cabecera">
+    <a href="principal.html" class="reg-logo">Moken</a>
+  </header>
+
+  <main class="reg-tarjeta">
+    <p class="reg-lema">Acompañamiento consciente</p>
+    <h1>Comienza tu proceso</h1>
+    <p class="reg-intro">Crea tu cuenta y avanza a tu ritmo, un día a la vez.</p>
+
+    <form id="registro-form">
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="campo">
+        <label for="correo">Correo electrónico</label>
+        <input id="correo" name="correo" type="email" autocomplete="email" required>
+      </div>
+
+      <div class="campo">
+        <label for="clave">Contraseña</label>
+        <input id="clave" name="clave" type="password" autocomplete="new-password" minlength="8" required aria-describedby="ayuda-clave">
+        <p class="ayuda" id="ayuda-clave">Mínimo 8 caracteres, con letras y números.</p>
+      </div>
+
+      <div class="campo">
+        <label for="clave2">Confirmar contraseña</label>
+        <input id="clave2" name="clave2" type="password" autocomplete="new-password" required>
+      </div>
+
+      <div class="campo campo-check">
+        <input id="terminos" name="terminos" type="checkbox" required>
+        <label for="terminos">Acepto los términos de uso y la política de privacidad</label>
+      </div>
+
+      <button type="submit" class="boton-principal">Crear cuenta</button>
+
+      <p class="reg-pie">¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
+    </form>
+  </main>
+  <script src="registro.js"></script>
+</body>
+</html>

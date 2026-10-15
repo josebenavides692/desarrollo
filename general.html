@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moken - Mi proceso</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- ===== Menú lateral ===== -->
+  <aside class="menu-lateral">
+
+    <h2 class="logo"><span class="punto-logo"></span>Moken</h2>
+
+    <nav>
+      <p class="menu-titulo">Mi proceso</p>
+      <ul>
+        <li><a href="general.html" class="menu-link activo"><span class="menu-icono">&#9638;</span>Mi proceso</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128197;</span>Calendario</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128202;</span>Mi progreso</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#127941;</span>Logros</a></li>
+      </ul>
+
+      <p class="menu-titulo">Comunidad</p>
+      <ul>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128101;</span>Amigos</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128172;</span>Mis grupos</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128269;</span>Explorar</a></li>
+      </ul>
+
+      <p class="menu-titulo">Mi espacio</p>
+      <ul>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128214;</span>Mi diario</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#127891;</span>Recursos</a></li>
+      </ul>
+    </nav>
+
+    <nav class="menu-cuenta">
+      <p class="menu-titulo">Cuenta</p>
+      <ul>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128100;</span>Mi perfil</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#9881;</span>Configuración</a></li>
+        <li><a href="principal.html" class="menu-link"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
+      </ul>
+    </nav>
+
+  </aside>
+
+  <!-- ===== Contenido principal ===== -->
+  <main class="contenido">
+
+    <header class="encabezado">
+      <div>
+        <h1>Buenos días</h1>
+        <p class="frase">"Un día a la vez es todo lo que necesitas hacer hoy."</p>
+      </div>
+      <div class="usuario">
+        <span class="avatar">&#128100;</span>
+        <span>Mi cuenta</span>
+      </div>
+    </header>
+
+    <!-- Tarjeta de progreso -->
+    <section class="tarjeta tarjeta-progreso">
+      <div class="circulo-progreso">
+        <div class="circulo-interior">
+          <strong>0</strong>
+          <span>/ 30 d</span>
+        </div>
+      </div>
+
+      <div class="progreso-texto">
+        <div class="tags">
+          <span class="tag tag-habito">Hábito: Sin elegir</span>
+          <span class="tag tag-privado">Privado</span>
+        </div>
+        <h2>Tu proceso empieza hoy</h2>
+        <p>
+          Este es tu primer día. Elige el hábito que quieres trabajar y registra
+          cómo te fue hoy. Cada día cuenta y no tienes que hacerlo perfecto.
+        </p>
+      </div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section class="stats">
+      <div class="tarjeta stat">
+        <span class="stat-etiqueta">Racha actual</span>
+        <strong class="stat-valor verde">0 días</strong>
+        <span class="stat-nota">Meta: 30 días</span>
+      </div>
+      <div class="tarjeta stat">
+        <span class="stat-etiqueta">Mejor racha</span>
+        <strong class="stat-valor naranja">0 días</strong>
+        <span class="stat-nota">Aún sin registros</span>
+      </div>
+      <div class="tarjeta stat">
+        <span class="stat-etiqueta">Días registrados</span>
+        <strong class="stat-valor azul">0 días</strong>
+        <span class="stat-nota">Total histórico</span>
+      </div>
+      <div class="tarjeta stat">
+        <span class="stat-etiqueta">Cumplimiento</span>
+        <strong class="stat-valor morado">--</strong>
+        <span class="stat-nota">Tasa de constancia</span>
+      </div>
+    </section>
+
+    <!-- Registro del día + calendario -->
+    <section class="fila-doble">
+
+      <div class="columna-izquierda">
+
+        <div class="tarjeta registro">
+          <h3>¿Cómo fue tu día de hoy?</h3>
+
+          <div class="opciones-dia">
+            <button class="opcion-dia">&#9745; Día limpio &#10003;</button>
+            <button class="opcion-dia">&#9888; Tuve una recaída</button>
+          </div>
+
+          <input type="text" class="notas" placeholder="Escribe notas de tu día si te sientes con ganas... (opcional)">
+
+          <button class="boton-guardar">Guardar registro</button>
+        </div>
+
+        <div class="reflexion">
+          <span class="reflexion-titulo">Reflexión de hoy</span>
+          <p>"No miras la montaña completa. Solo enfócate en el paso que estás dando en este instante."</p>
+        </div>
+
+      </div>
+
+      <div class="tarjeta calendario">
+        <div class="calendario-header">
+          <h3>Calendario Mensual</h3>
+          <span class="mes">Octubre 2026</span>
+        </div>
+
+        <div class="calendario-grid">
+          <div class="cal-dia cal-previo"><span class="cal-letra">L</span>28</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>29</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>30</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">J</span>1</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">V</span>2</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">S</span>3</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">D</span>4</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">L</span>5</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>6</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>7</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">J</span>8</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">V</span>9</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">S</span>10</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">D</span>11</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">L</span>12</div>
+          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>13</div>
+          <div class="cal-dia cal-hoy"><span class="cal-letra">M</span>14</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">J</span>15</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">V</span>16</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">S</span>17</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">D</span>18</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">L</span>19</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>20</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>21</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">J</span>22</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">V</span>23</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">S</span>24</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">D</span>25</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">L</span>26</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>27</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>28</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">J</span>29</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">V</span>30</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">S</span>31</div>
+          <div class="cal-dia cal-proximo"><span class="cal-letra">D</span>1</div>
+        </div>
+
+        <div class="leyenda">
+          <span><i class="punto limpio"></i>Limpio</span>
+          <span><i class="punto recaida"></i>Recaída</span>
+          <span><i class="punto proximo"></i>Próximo</span>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>
