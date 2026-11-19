@@ -20,15 +20,6 @@ from app.controllers.events_controller import router as events_router
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.usuario_controller import router as usuario_router
 
-from app.models.database import inicializar_db
-from app.models.events import (
-    crear_evento,
-    obtener_eventos,
-    obtener_evento_por_id,
-    actualizar_evento,
-    eliminar_evento
-)
-
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
 
