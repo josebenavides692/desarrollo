@@ -309,17 +309,17 @@ def pagina_principal():
 
 @app.get("/registro.html")
 def pagina_registro():
-    return FileResponse(BASE_DIR / "registro.html")
+    return FileResponse(VIEWS_DIR / "registro.html")
 
 
 @app.get("/login.html")
 def pagina_login():
-    return FileResponse(BASE_DIR / "login.html")
+    return FileResponse(VIEWS_DIR / "login.html")
 
 
 @app.get("/perfil.html")
 def pagina_perfil():
-    return FileResponse(BASE_DIR / "perfil.html")
+    return FileResponse(VIEWS_DIR / "perfil.html")
 
 
 @app.get("/style.css")
