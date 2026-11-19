@@ -1,6 +1,6 @@
 
 
-document.getElementById("registro-form").addEventListener("submit", function(event) {
+document.getElementById("registro-form").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     let nombre = document.getElementById("nombre").value.trim();
@@ -45,21 +45,39 @@ document.getElementById("registro-form").addEventListener("submit", function(eve
         return;
     }
 
-    let usuario = {
-        nombre: nombre,
-        correo: correo,
-        clave: clave
+
+    const datos = {
+    nombre,
+    correo,
+    clave
     };
 
-    usuarios.push(usuario);
+    try {
+        const respuesta = await fetch("/usuarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(datos)
+        });
 
-    localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        const resultado = await respuesta.json();
 
-    mensaje.textContent = "¡Cuenta creada! Ahora puedes iniciar sesión.";
+        if (!respuesta.ok) {
+            throw new Error(
+                resultado.detail || "No se pudo crear la cuenta."
+            );
+        }
 
-    document.getElementById("registro-form").reset();
+        mensaje.textContent = "Cuenta creada correctamente";
 
-    setTimeout(function() {
-        window.location.href = "login.html";
-    }, 1500);
+        document.getElementById("registro-form").reset();
+
+        setTimeout(() => {
+            window.location.href = "/login.html";
+        }, 1500);
+
+    } catch (error) {
+        mensaje.textContent = error.message;
+    }
 });
