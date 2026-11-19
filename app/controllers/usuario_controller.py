@@ -25,7 +25,7 @@ class ActualizarPerfil(BaseModel):
 # Consultar perfil
 # -------------------------
 
-@router.get("//usuarios/me")
+@router.get("/usuarios/me")
 def consultar_perfil(request: Request):
 
     usuario = usuario_actual(request)
