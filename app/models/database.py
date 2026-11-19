@@ -28,6 +28,7 @@ def inicializar_db():
 
     with conectar_db() as conexion:
 
+        # Tabla de usuarios
         conexion.execute("""
             CREATE TABLE IF NOT EXISTS usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,3 +38,15 @@ def inicializar_db():
                 telefono TEXT NOT NULL DEFAULT ''
             )
         """)
+
+        # Tabla de eventos
+        conexion.execute("""
+            CREATE TABLE IF NOT EXISTS eventos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nombre TEXT NOT NULL,
+                descripcion TEXT NOT NULL DEFAULT '',
+                fecha TEXT,
+                lugar TEXT NOT NULL DEFAULT '',
+                creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+            )
+        """) 
