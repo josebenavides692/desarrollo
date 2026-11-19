@@ -13,7 +13,6 @@ from pydantic import BaseModel, Field
 from starlette.middleware.sessions import SessionMiddleware
 
 from fastapi.responses import FileResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
 from app.controllers.events_controller import router as events_router
