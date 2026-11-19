@@ -13,6 +13,7 @@ from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import FileResponse
+from app.controllers.evento_controller import router as evento_router
 
 BASE_DIR = Path(__file__).resolve().parent
 DB_PATH = Path(os.getenv("DATABASE_PATH", str(BASE_DIR / "usuarios.db")))
@@ -56,6 +57,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+app.include_router(evento_router)
 
 app.add_middleware(
     SessionMiddleware,
@@ -165,7 +167,7 @@ def usuario_actual(request: Request):
 
 @app.get("/")
 def home():
-    return FileResponse(BASE_DIR / "principal.html")
+    return {"mensaje": "Mi API está funcionando"}
 
 
 @app.get("/eventos")
