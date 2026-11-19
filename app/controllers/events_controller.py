@@ -1,7 +1,9 @@
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Request
 from pydantic import BaseModel, Field
 from typing import Optional
+
+from app.controllers.auth_controller import usuario_actual
 
 from app.models.events import (
     crear_evento,
@@ -10,6 +12,7 @@ from app.models.events import (
     actualizar_evento,
     eliminar_evento
 )
+
 
 router = APIRouter(tags=["Eventos"])
 
@@ -37,9 +40,11 @@ class EventoActualizar(BaseModel):
 # -------------------------
 
 @router.get("/eventos")
-def listar_eventos():
+def listar_eventos(request: Request):
 
-    eventos = obtener_eventos()
+    usuario = usuario_actual(request)
+
+    eventos = obtener_eventos(usuario["id"])
 
     return {
         "eventos": eventos
@@ -50,17 +55,26 @@ def listar_eventos():
 # Crear un evento
 # -------------------------
 
-@router.post("/eventos", status_code=status.HTTP_201_CREATED)
-def registrar_evento(datos: EventoCrear):
+@router.post(
+    "/eventos",
+    status_code=status.HTTP_201_CREATED
+)
+def registrar_evento(datos: EventoCrear, request: Request):
+
+    usuario = usuario_actual(request)
 
     evento_id = crear_evento(
+        usuario["id"],
         datos.nombre,
         datos.descripcion,
         datos.fecha,
         datos.lugar
     )
 
-    evento = obtener_evento_por_id(evento_id)
+    evento = obtener_evento_por_id(
+        evento_id,
+        usuario["id"]
+    )
 
     return {
         "mensaje": "Evento creado correctamente",
@@ -73,9 +87,14 @@ def registrar_evento(datos: EventoCrear):
 # -------------------------
 
 @router.get("/eventos/{evento_id}")
-def consultar_evento(evento_id: int):
+def consultar_evento(evento_id: int, request: Request):
 
-    evento = obtener_evento_por_id(evento_id)
+    usuario = usuario_actual(request)
+
+    evento = obtener_evento_por_id(
+        evento_id,
+        usuario["id"]
+    )
 
     if evento is None:
         raise HTTPException(
@@ -91,29 +110,37 @@ def consultar_evento(evento_id: int):
 # -------------------------
 
 @router.put("/eventos/{evento_id}")
-def modificar_evento(evento_id: int, datos: EventoActualizar):
+def modificar_evento(
+    evento_id: int,
+    datos: EventoActualizar,
+    request: Request
+):
 
-    evento = obtener_evento_por_id(evento_id)
+    usuario = usuario_actual(request)
 
-    if evento is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="El evento no existe"
-        )
-
-    actualizar_evento(
+    actualizado = actualizar_evento(
         evento_id,
+        usuario["id"],
         datos.nombre,
         datos.descripcion,
         datos.fecha,
         datos.lugar
     )
 
-    evento_actualizado = obtener_evento_por_id(evento_id)
+    if not actualizado:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="El evento no existe"
+        )
+
+    evento = obtener_evento_por_id(
+        evento_id,
+        usuario["id"]
+    )
 
     return {
         "mensaje": "Evento actualizado correctamente",
-        "evento": evento_actualizado
+        "evento": evento
     }
 
 
@@ -122,9 +149,14 @@ def modificar_evento(evento_id: int, datos: EventoActualizar):
 # -------------------------
 
 @router.delete("/eventos/{evento_id}")
-def borrar_evento(evento_id: int):
+def borrar_evento(evento_id: int, request: Request):
 
-    eliminado = eliminar_evento(evento_id)
+    usuario = usuario_actual(request)
+
+    eliminado = eliminar_evento(
+        evento_id,
+        usuario["id"]
+    )
 
     if not eliminado:
         raise HTTPException(
