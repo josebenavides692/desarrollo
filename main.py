@@ -17,12 +17,18 @@ from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-from app.controllers.evento_controller import router as evento_router
+from app.controllers.events_controller import router as events_router
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.usuario_controller import router as usuario_router
 
 from app.models.database import conectar_db, inicializar_db
-from app.models.evento import obtener_eventos
+from app.models.events import (
+    crear_evento,
+    obtener_eventos,
+    obtener_evento_por_id,
+    actualizar_evento,
+    eliminar_evento
+)
 
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
@@ -47,11 +53,11 @@ app = FastAPI(lifespan=lifespan)
 
 inicializar_db()
 
-app.include_router(evento_router)
+app.include_router(events_router)
 app.include_router(auth_router)
 app.include_router(usuario_router)
 
-pp.mount(
+app.mount(
     "/static",
     StaticFiles(directory="app/static"),
     name="static"
@@ -79,11 +85,6 @@ class DatosPerfil(BaseModel):
 @app.get("/")
 def home():
     return FileResponse(VIEWS_DIR / "principal.html")
-
-
-@app.get("/eventos")
-def listar_eventos():
-    return {"eventos": ["CONIITI 2024", "Taller React", "Charla IA"]}
     
 
 @app.get("/principal.html")
