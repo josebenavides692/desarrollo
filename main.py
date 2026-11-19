@@ -107,6 +107,16 @@ def pagina_perfil():
     return FileResponse(VIEWS_DIR / "perfil.html")
 
 
+@app.get("/general.html")
+def pagina_general():
+    return FileResponse(VIEWS_DIR / "general.html")
+
+
+@app.get("/objetivo.html")
+def pagina_objetivo():
+    return FileResponse(VIEWS_DIR / "objetivo.html")
+
+
 @app.get("/style.css")
 def estilo_principal():
     return FileResponse(BASE_DIR / "style.css")
