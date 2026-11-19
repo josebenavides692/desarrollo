@@ -46,30 +46,26 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     }
 
 
-    const datos = {
-    nombre,
-    correo,
-    clave
-    };
-
     try {
-        const respuesta = await fetch("/usuarios", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(datos)
+    const respuesta = await fetch("/usuarios", {
+        method: "POST",
+        headers: {
+              "Content-Type": "application/json"
+         },
+          body: JSON.stringify({
+            nombre,
+           correo,
+           clave
+          })
         });
 
         const resultado = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(
-                resultado.detail || "No se pudo crear la cuenta."
-            );
+            throw new Error(resultado.detail || "Error al registrar usuario.");
         }
 
-        mensaje.textContent = "Cuenta creada correctamente";
+        mensaje.textContent = "¡Cuenta creada correctamente!";
 
         document.getElementById("registro-form").reset();
 
@@ -80,4 +76,5 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     } catch (error) {
         mensaje.textContent = error.message;
     }
+});
 });
