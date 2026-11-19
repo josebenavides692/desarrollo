@@ -18,6 +18,7 @@ from fastapi.staticfiles import StaticFiles
 from app.controllers.evento_controller import router as evento_router
 
 BASE_DIR = Path(__file__).resolve().parent
+VIEWS_DIR = BASE_DIR / "app" / "views"
 DB_PATH = Path(os.getenv("DATABASE_PATH", str(BASE_DIR / "usuarios.db")))
 
 SESSION_SECRET = os.getenv(
@@ -180,7 +181,7 @@ def usuario_actual(request: Request):
 
 @app.get("/")
 def home():
-    return {"mensaje": "Mi API está funcionando"}
+    return FileResponse(VIEWS_DIR / "principal.html")
 
 
 @app.get("/eventos")
@@ -303,7 +304,7 @@ def cerrar_sesion(request: Request):
 
 @app.get("/principal.html")
 def pagina_principal():
-    return FileResponse(BASE_DIR / "principal.html")
+    return FileResponse(VIEWS_DIR / "principal.html")
 
 
 @app.get("/registro.html")
