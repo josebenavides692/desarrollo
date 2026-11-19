@@ -16,10 +16,10 @@ from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from app.controllers.evento_controller import router as evento_router
+from app.models.database import conectar_db, inicializar_db
 
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
-DB_PATH = Path(os.getenv("DATABASE_PATH", str(BASE_DIR / "usuarios.db")))
 
 SESSION_SECRET = os.getenv(
     "SESSION_SECRET_KEY",
@@ -30,28 +30,6 @@ if SESSION_SECRET == "CAMBIAR-ESTA-CLAVE-ANTES-DE-PUBLICAR-MOKEN":
     print("ADVERTENCIA: configura SESSION_SECRET_KEY antes de publicar.")
 
 PASSWORD_ITERATIONS = 2**14
-
-
-def conectar_db():
-    conexion = sqlite3.connect(DB_PATH)
-    conexion.row_factory = sqlite3.Row
-    return conexion
-
-
-def inicializar_db():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-
-    with conectar_db() as conexion:
-        conexion.execute("""
-            CREATE TABLE IF NOT EXISTS usuarios (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nombre TEXT NOT NULL,
-                correo TEXT NOT NULL UNIQUE,
-                clave_hash TEXT NOT NULL,
-                telefono TEXT NOT NULL DEFAULT ''
-            )
-        """)
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
