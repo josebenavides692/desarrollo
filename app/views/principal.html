@@ -186,21 +186,7 @@
     </div>
   </footer>
 
-  <script>
-    let sesion = JSON.parse(localStorage.getItem("sesionMoken"));
-
-    if (sesion) {
-      document.getElementById("bienvenida").textContent = "Hola, " + sesion.nombre;
-      document.getElementById("boton-login").hidden = true;
-      document.getElementById("boton-registro").hidden = true;
-      document.getElementById("boton-salir").hidden = false;
-    }
-
-    document.getElementById("boton-salir").addEventListener("click", function() {
-      localStorage.removeItem("sesionMoken");
-      window.location.reload();
-    });
-  </script>
-
+  <script src="/static/js/code.js"></script>
+  
 </body>
 </html>
