@@ -49,4 +49,4 @@ def inicializar_db():
                 lugar TEXT NOT NULL DEFAULT '',
                 creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
             )
-        """) 
+        """)
