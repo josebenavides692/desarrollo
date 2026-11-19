@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Moken - Mi proceso</title>
-  <link rel="stylesheet" href="general.css">
+  <link rel="stylesheet" href="/static/css/general.css">
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     <nav>
       <p class="menu-titulo">Mi proceso</p>
       <ul>
-        <li><a href="general.html" class="menu-link activo"><span class="menu-icono">&#9638;</span>Mi proceso</a></li>
+        <li><a href="/general.html" class="menu-link activo"><span class="menu-icono">&#9638;</span>Mi proceso</a></li>
         <li><a href="#" class="menu-link"><span class="menu-icono">&#128197;</span>Calendario</a></li>
         <li><a href="#" class="menu-link"><span class="menu-icono">&#128202;</span>Mi progreso</a></li>
         <li><a href="#" class="menu-link"><span class="menu-icono">&#127941;</span>Logros</a></li>
@@ -41,9 +41,12 @@
     <nav class="menu-cuenta">
       <p class="menu-titulo">Cuenta</p>
       <ul>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128100;</span>Mi perfil</a></li>
+        <li><a href="/perfil.html" class="menu-link"><span class="menu-icono">&#128100;</span>Mi perfil</a></li>
         <li><a href="#" class="menu-link"><span class="menu-icono">&#9881;</span>Configuración</a></li>
-        <li><a href="principal.html" class="menu-link cerrar-sesion"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
+        <li><a href="/" class="menu-link cerrar-sesion"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
+        <button type="button" class="menu-link cerrar-sesion">
+        Cerrar sesión
+        </button>
       </ul>
     </nav>
 
@@ -60,8 +63,11 @@
       <div class="usuario">
         <span class="avatar">&#128100;</span>
         <span id="nombre-usuario">Mi cuenta</span>
-        <a href="principal.html" class="tag tag-habito cerrar-sesion">Cerrar sesión</a>
+        <a href="/" class="tag tag-habito cerrar-sesion">Cerrar sesión</a>
       </div>
+      <button type="button" class="tag tag-habito cerrar-sesion">
+      Cerrar sesión
+      </button>
     </header>
 
     <!-- Tarjeta de progreso -->
@@ -192,7 +198,7 @@
 
 </div>
 
-<script src="general.js"></script>
+<script src="/static/js/general.js"></script>
 
 </body>
 </html>
