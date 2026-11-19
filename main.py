@@ -59,7 +59,7 @@ app.include_router(usuario_router)
 
 app.mount(
     "/static",
-    StaticFiles(directory="app/static"),
+    StaticFiles(directory=str(BASE_DIR / "app" / "static")),
     name="static"
 )
 
