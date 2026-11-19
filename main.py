@@ -16,10 +16,14 @@ from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+
 from app.controllers.evento_controller import router as evento_router
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.evento_controller import router as evento_router
+from app.controllers.usuario_controller import router as usuario_router
+
 from app.models.database import conectar_db, inicializar_db
+
 
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
@@ -44,6 +48,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.include_router(evento_router)
 app.include_router(auth_router)
+app.include_router(usuario_router)
 
 pp.mount(
     "/static",
@@ -78,50 +83,6 @@ def home():
 @app.get("/eventos")
 def listar_eventos():
     return {"eventos": ["CONIITI 2024", "Taller React", "Charla IA"]}
-    
-
-@app.get("/usuarios/me")
-def consultar_perfil(request: Request):
-    usuario = usuario_actual(request)
-
-    return {
-        "nombre": usuario["nombre"],
-        "correo": usuario["correo"],
-        "telefono": usuario["telefono"]
-    }
-
-
-@app.put("/usuarios/me")
-def actualizar_perfil(datos: DatosPerfil, request: Request):
-    usuario = usuario_actual(request)
-
-    nombre = datos.nombre.strip()
-    correo = validar_correo(datos.correo)
-    telefono = datos.telefono.strip()
-
-    if len(nombre) < 2:
-        raise HTTPException(
-            status_code=422,
-            detail="El nombre debe tener al menos 2 caracteres."
-        )
-
-    try:
-        with conectar_db() as conexion:
-            conexion.execute(
-                """
-                UPDATE usuarios
-                SET nombre = ?, correo = ?, telefono = ?
-                WHERE id = ?
-                """,
-                (nombre, correo, telefono, usuario["id"])
-            )
-    except sqlite3.IntegrityError:
-        raise HTTPException(
-            status_code=409,
-            detail="Ese correo ya pertenece a otra cuenta."
-        )
-
-    return {"mensaje": "Perfil actualizado correctamente."}
     
 
 @app.get("/principal.html")
