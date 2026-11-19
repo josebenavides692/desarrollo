@@ -19,7 +19,6 @@ from fastapi.staticfiles import StaticFiles
 
 from app.controllers.evento_controller import router as evento_router
 from app.controllers.auth_controller import router as auth_router
-from app.controllers.evento_controller import router as evento_router
 from app.controllers.usuario_controller import router as usuario_router
 
 from app.models.database import conectar_db, inicializar_db
@@ -45,6 +44,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
+inicializar_db()
 
 app.include_router(evento_router)
 app.include_router(auth_router)
