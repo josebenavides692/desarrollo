@@ -13,6 +13,8 @@ from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import FileResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from app.controllers.evento_controller import router as evento_router
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -57,7 +59,18 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
 app.include_router(evento_router)
+
+pp.mount(
+    "/static",
+    StaticFiles(directory="app/static"),
+    name="static"
+)
+
+templates = Jinja2Templates(
+    directory="app/views"
+)
 
 app.add_middleware(
     SessionMiddleware,
