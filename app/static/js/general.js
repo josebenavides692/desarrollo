@@ -1,4 +1,4 @@
-//document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
     // Obtener los elementos de la página
     const nombreUsuario = document.getElementById("nombre-usuario");
