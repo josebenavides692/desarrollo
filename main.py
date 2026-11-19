@@ -1,4 +1,3 @@
-
 import os
 import re
 import sqlite3
@@ -21,14 +20,7 @@ from app.controllers.events_controller import router as events_router
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.usuario_controller import router as usuario_router
 
-from app.models.database import conectar_db, inicializar_db
-from app.models.events import (
-    crear_evento,
-    obtener_eventos,
-    obtener_evento_por_id,
-    actualizar_evento,
-    eliminar_evento
-)
+from app.models.database import inicializar_db
 
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
@@ -51,8 +43,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-inicializar_db()
-
 app.include_router(events_router)
 app.include_router(auth_router)
 app.include_router(usuario_router)
@@ -63,9 +53,6 @@ app.mount(
     name="static"
 )
 
-templates = Jinja2Templates(
-    directory="app/views"
-)
 
 app.add_middleware(
     SessionMiddleware,
@@ -115,38 +102,3 @@ def pagina_general():
 @app.get("/objetivo.html")
 def pagina_objetivo():
     return FileResponse(VIEWS_DIR / "objetivo.html")
-
-
-@app.get("/style.css")
-def estilo_principal():
-    return FileResponse(BASE_DIR / "style.css")
-
-
-@app.get("/registro.css")
-def estilo_registro():
-    return FileResponse(BASE_DIR / "registro.css")
-
-
-@app.get("/perfil.css")
-def estilo_perfil():
-    return FileResponse(BASE_DIR / "perfil.css")
-
-
-@app.get("/registro.js")
-def javascript_registro():
-    return FileResponse(BASE_DIR / "registro.js")
-
-
-@app.get("/login.js")
-def javascript_login():
-    return FileResponse(BASE_DIR / "login.js")
-
-
-@app.get("/perfil.js")
-def javascript_perfil():
-    return FileResponse(BASE_DIR / "perfil.js")
-
-
-@app.get("/code.js")
-def javascript_principal():
-    return FileResponse(BASE_DIR / "code.js")
