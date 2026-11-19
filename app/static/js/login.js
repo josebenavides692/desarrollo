@@ -1,31 +1,38 @@
-document.getElementById("login-form").addEventListener("submit", function(event) {
+document.getElementById("login-form").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    let correo = document.getElementById("correo").value.trim().toLowerCase();
-    let clave = document.getElementById("clave").value;
-    let mensaje = document.getElementById("mensaje-login");
+    const correo = document.getElementById("correo").value.trim().toLowerCase();
+    const clave = document.getElementById("clave").value;
+    const mensaje = document.getElementById("mensaje-login");
 
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    try {
+        const respuesta = await fetch("/login", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                correo,
+                clave
+            })
+        });
 
-    let usuarioEncontrado = usuarios.find(function(usuario) {
-        return usuario.correo === correo && usuario.clave === clave;
-    });
+        const resultado = await respuesta.json();
 
-    if (usuarioEncontrado) {
-        let sesion = {
-            nombre: usuarioEncontrado.nombre,
-            correo: usuarioEncontrado.correo
-        };
+        if (!respuesta.ok) {
+            throw new Error(
+                resultado.detail || "No se pudo iniciar sesión."
+            );
+        }
 
-        localStorage.setItem("sesionMoken", JSON.stringify(sesion));
+        mensaje.textContent = "¡Bienvenido a Moken!";
 
-        mensaje.textContent = "Inicio de sesión correcto. ¡Bienvenido a Moken!";
-
-        setTimeout(function() {
-            window.location.href = "general.html";
+        setTimeout(() => {
+            window.location.href = "/general.html";
         }, 1000);
 
-    } else {
-        mensaje.textContent = "Correo o contraseña incorrectos.";
+    } catch (error) {
+        mensaje.textContent = error.message;
     }
 });
