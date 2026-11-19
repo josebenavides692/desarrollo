@@ -22,7 +22,7 @@ from app.controllers.auth_controller import router as auth_router
 from app.controllers.usuario_controller import router as usuario_router
 
 from app.models.database import conectar_db, inicializar_db
-
+from app.models.evento import obtener_eventos
 
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
