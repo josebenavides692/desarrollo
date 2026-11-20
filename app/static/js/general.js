@@ -1,10 +1,8 @@
-document.addEventListener("DOMContentLoaded", async () => {
 
-    // Obtener los elementos de la página
+document.addEventListener("DOMContentLoaded", async () => {
     const nombreUsuario = document.getElementById("nombre-usuario");
     const botonesSalir = document.querySelectorAll(".cerrar-sesion");
 
-    // Consultar la sesión mediante el perfil
     try {
         const respuesta = await fetch("/usuarios/me", {
             credentials: "same-origin"
@@ -27,9 +25,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Cerrar sesión
     botonesSalir.forEach(boton => {
-        boton.addEventListener("click", async () => {
+        boton.addEventListener("click", async (evento) => {
+            evento.preventDefault();
 
             try {
                 const respuesta = await fetch("/logout", {
@@ -47,8 +45,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 console.error(error);
                 alert("Ocurrió un error al cerrar sesión.");
             }
-
         });
     });
-
 });
