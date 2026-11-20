@@ -6,49 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moken - Mi proceso</title>
     <link rel="stylesheet" href="/static/css/general.css">
+    <link rel="stylesheet" href="/static/css/calendario.css">
+    <link rel="stylesheet" href="/static/css/perfil.css">
 </head>
-<body>
-
-<div class="layout">
-
-    <aside class="menu-lateral">
-        <h2 class="logo"><span class="punto-logo"></span>Moken</h2>
-
-        <nav>
-            <p class="menu-titulo">Mi proceso</p>
-            <ul>
-                <li>
-                    <a href="/general.html" class="menu-link activo">
-                        <span class="menu-icono">&#9638;</span>Mi proceso
-                    </a>
-                </li>
-                <li><a href="#eventos" class="menu-link">Mis eventos</a></li>
-                <li><a href="#nuevo-evento" class="menu-link">Crear evento</a></li>
-                <li><a href="/objetivo.html" class="menu-link">Mi objetivo</a></li>
-            </ul>
-
-            <p class="menu-titulo">Mi espacio</p>
-            <ul>
-                <li><a href="/calendario.html" class="menu-link">Calendario</a></li>
-                <li><a href="/perfil.html" class="menu-link">Mi perfil</a></li>
-            </ul>
+<body class="espacio">
+    <aside class="lateral">
+        <a class="marca" href="/general.html">Moken</a>
+        <nav aria-label="Tu espacio">
+            <span class="rotulo">Tu espacio</span>
+            <a href="/general.html" aria-current="page">▦ <span>Proceso</span></a>
+            <a href="/calendario.html">▤ <span>Calendario</span></a>
+            <a href="/perfil.html">♙ <span>Mi perfil</span></a>
         </nav>
-
-        <nav class="menu-cuenta">
-            <p class="menu-titulo">Cuenta</p>
-            <ul>
-                <li>
-                    <button type="button" class="menu-link cerrar-sesion">
-                        Cerrar sesión
-                    </button>
-                </li>
-            </ul>
-        </nav>
+        <div class="ritmo">
+            <strong>A tu ritmo.</strong>
+            <p>Tu proceso no te define. Cada pequeño paso también es un avance.</p>
+        </div>
+        <button id="salir" type="button" class="cerrar-sesion">Cerrar sesión</button>
     </aside>
 
-    <main class="contenido">
+    <main>
 
-        <header class="encabezado">
+        <header class="cabecera">
             <div>
                 <h1>Mi proceso</h1>
                 <p class="frase">
@@ -56,42 +35,31 @@
                 </p>
             </div>
 
-            <div class="usuario">
-                <span class="avatar">&#128100;</span>
-                <span id="nombre-usuario">Cargando usuario...</span>
-            </div>
+            <a class="cuenta" href="/perfil.html" id="nombre-usuario">Mi perfil</a>
         </header>
 
-        <section class="tarjeta tarjeta-progreso">
-            <div class="progreso-texto">
-                <div class="tags">
-                    <span class="tag tag-habito">Moken</span>
-                    <span class="tag tag-privado">Espacio personal</span>
+        <section class="tarjeta destacada">
+            <div class="fila-accion">
+                <div>
+                    <p class="ceja">Tu proceso actual</p>
+                    <h2 id="habito-actual">Mi objetivo</h2>
+                    <p id="meta-actual"></p>
                 </div>
-
-                <h2>Organiza tu proceso</h2>
-                <p>
-                    Aquí puedes registrar y administrar tus eventos.
-                    Cada evento queda asociado a tu cuenta y se almacena
-                    en la base de datos.
-                </p>
+                <a class="primario" href="/objetivo.html">Nuevo objetivo</a>
             </div>
         </section>
 
-        <section class="stats">
-            <div class="tarjeta stat">
-                <span class="stat-etiqueta">Eventos registrados</span>
-                <strong class="stat-valor verde" id="total-eventos">0</strong>
-                <span class="stat-nota">Total de eventos</span>
-            </div>
-
-            <div class="tarjeta stat">
-                <span class="stat-etiqueta">Próximos eventos</span>
-                <strong class="stat-valor azul" id="proximos-eventos">0</strong>
-                <span class="stat-nota">Con fecha futura</span>
-            </div>
+        <section class="tarjeta" id="mis-objetivos">
+            <h2>Mis objetivos</h2>
+            <div id="lista-mis-objetivos" aria-live="polite"><p>Cargando objetivos…</p></div>
         </section>
 
+        <section class="resumen" aria-label="Resumen de eventos">
+            <article class="tarjeta"><h2>Eventos registrados</h2><strong id="total-eventos">—</strong></article>
+            <article class="tarjeta"><h2>Próximos eventos</h2><strong id="proximos-eventos">—</strong></article>
+        </section>
+
+        <div class="paneles">
         <section class="tarjeta registro" id="nuevo-evento">
             <h2 id="titulo-formulario">Registrar un evento</h2>
 
@@ -160,17 +128,11 @@
             </div>
         </section>
 
-        <div class="reflexion">
-            <span class="reflexion-titulo">Recuerda</span>
-            <p>
-                El progreso se construye paso a paso. Mantén organizadas
-                tus actividades y objetivos.
-            </p>
         </div>
 
     </main>
-</div>
 
+<script src="/static/js/habitos.js"></script>
 <script src="/static/js/general.js"></script>
 
 </body>

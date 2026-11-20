@@ -1,79 +1,116 @@
-
-const formulario = document.getElementById("perfil-form");
+const perfil = document.getElementById("perfil-form");
+const campos = perfil.querySelector("fieldset");
 const mensaje = document.getElementById("mensaje");
-const botonGuardar = formulario.querySelector(
-    'button[type="submit"]'
-);
+const guardar = document.getElementById("guardar");
+const cancelar = document.getElementById("cancelar");
+const descargar = document.getElementById("descargar");
+let usuario;
 
-async function cargarPerfil() {
-    mensaje.textContent = "Cargando perfil...";
+async function solicitarPerfil(url, opciones) {
+    const respuesta = await fetch(url, opciones);
+    if (!respuesta.ok) {
+        if (respuesta.status === 401) window.location.replace("/login.html");
+        const datos = await respuesta.json().catch(() => ({}));
+        throw new Error(typeof datos.detail === "string" ? datos.detail : "No se pudo completar la solicitud.");
+    }
+    return respuesta.json();
+}
 
+function mostrarPerfil() {
+    for (const campo of ["nombre", "correo", "telefono"]) {
+        perfil.elements[campo].value = usuario[campo] ?? "";
+    }
+    document.getElementById("nombre-visible").textContent = usuario.nombre;
+    document.getElementById("cuenta").textContent = usuario.nombre;
+    document.getElementById("iniciales").textContent = usuario.nombre.trim().split(/\s+/)
+        .slice(0, 2).map(palabra => Array.from(palabra)[0]).join("").toUpperCase();
+}
+
+function bloquearFormulario(bloqueado) {
+    campos.disabled = bloqueado;
+    guardar.disabled = bloqueado;
+    cancelar.disabled = bloqueado;
+}
+
+perfil.addEventListener("submit", async evento => {
+    evento.preventDefault();
+    const datos = Object.fromEntries([...new FormData(perfil)].map(([campo, valor]) => [campo, valor.trim()]));
+    bloquearFormulario(true);
+    mensaje.textContent = "Guardando cambios…";
     try {
-        const respuesta = await fetch("/usuarios/me", {
-            credentials: "same-origin"
+        await solicitarPerfil("/usuarios/me", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(datos)
         });
+        usuario = { ...usuario, ...datos };
+        mostrarPerfil();
+        mensaje.textContent = "Perfil actualizado.";
+    } catch (error) {
+        mensaje.textContent = error.message;
+    } finally {
+        bloquearFormulario(false);
+    }
+});
 
-        if (!respuesta.ok) {
-            throw new Error(
-                respuesta.status === 401
-                    ? "Debes iniciar sesión para consultar tu perfil."
-                    : "No fue posible cargar el perfil."
-            );
-        }
+cancelar.addEventListener("click", () => {
+    mostrarPerfil();
+    mensaje.textContent = "Cambios descartados.";
+});
 
-        const usuario = await respuesta.json();
-
-        document.getElementById("nombre").value =
-            usuario.nombre ?? "";
-
-        document.getElementById("correo").value =
-            usuario.correo ?? "";
-
-        document.getElementById("telefono").value =
-            usuario.telefono ?? "";
-
-        mensaje.textContent = "";
+async function salir() {
+    try {
+        await solicitarPerfil("/logout", { method: "POST" });
+        window.location.assign("/");
     } catch (error) {
         mensaje.textContent = error.message;
     }
 }
 
-formulario.addEventListener("submit", async (evento) => {
-    evento.preventDefault();
+document.getElementById("salir").addEventListener("click", salir);
+document.getElementById("cerrar-sesion-perfil").addEventListener("click", salir);
 
-    botonGuardar.disabled = true;
-    mensaje.textContent = "Guardando cambios...";
-
-    const datos = {
-        nombre: document.getElementById("nombre").value.trim(),
-        correo: document.getElementById("correo").value.trim(),
-        telefono: document.getElementById("telefono").value.trim()
-    };
-
+descargar.addEventListener("click", async () => {
+    descargar.disabled = true;
     try {
-        const respuesta = await fetch("/usuarios/me", {
-            method: "PUT",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(datos)
+        const [{ objetivos }, { registros }] = await Promise.all([
+            solicitarPerfil("/objetivos"),
+            solicitarPerfil("/registros-diarios")
+        ]);
+        const archivo = new Blob([JSON.stringify({ perfil: usuario, objetivos, registros }, null, 2)], {
+            type: "application/json"
         });
-
-        const resultado = await respuesta.json();
-
-        if (!respuesta.ok) {
-            throw new Error(
-                resultado.detail || "No se pudieron guardar los cambios."
-            );
-        }
-
-        mensaje.textContent = "Perfil actualizado correctamente.";
+        const enlace = document.createElement("a");
+        enlace.href = URL.createObjectURL(archivo);
+        enlace.download = "mis-datos-moken.json";
+        enlace.click();
+        const url = enlace.href;
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        mensaje.textContent = "Descarga preparada.";
     } catch (error) {
         mensaje.textContent = error.message;
     } finally {
-        botonGuardar.disabled = false;
+        descargar.disabled = false;
     }
 });
+
+async function cargarPerfil() {
+    const habito = document.getElementById("habito-perfil");
+    try {
+        usuario = await solicitarPerfil("/usuarios/me");
+        mostrarPerfil();
+        bloquearFormulario(false);
+        descargar.disabled = false;
+        const { objetivos } = await solicitarPerfil("/objetivos");
+        const objetivo = objetivos[0];
+        habito.textContent = objetivo ? nombreHabito(objetivo.habito) : "Aún sin objetivo";
+        if (objetivo) {
+            document.getElementById("meta-perfil").textContent = `${objetivo.intencion} · ${objetivo.hito}`;
+        }
+    } catch (error) {
+        habito.textContent = "No se pudo cargar el objetivo";
+        mensaje.textContent = error.message;
+    }
+}
 
 cargarPerfil();
