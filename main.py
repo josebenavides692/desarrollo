@@ -1,17 +1,6 @@
-import os
-import re
-import sqlite3
-import hashlib
-import secrets
-import hmac
-
 from contextlib import asynccontextmanager
 from pathlib import Path
-
-from fastapi import FastAPI, HTTPException, Request
-from pydantic import BaseModel, Field
 from starlette.middleware.sessions import SessionMiddleware
-
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -59,12 +48,7 @@ app.add_middleware(
     https_only=os.getenv("ENVIRONMENT") == "production",
     max_age=60 * 60 * 8
 )
-
-class DatosPerfil(BaseModel):
-    nombre: str = Field(min_length=2, max_length=100)
-    correo: str = Field(min_length=5, max_length=254)
-    telefono: str = Field(default="", max_length=25)
-    
+ 
 
 @app.get("/")
 def home():
