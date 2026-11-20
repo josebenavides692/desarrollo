@@ -1,5 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
+
     const bienvenida = document.getElementById("bienvenida");
     const botonLogin = document.getElementById("boton-login");
     const botonRegistro = document.getElementById("boton-registro");
@@ -13,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (respuesta.ok) {
             const usuario = await respuesta.json();
 
-            bienvenida.textContent = "Hola, " + usuario.nombre;
+            bienvenida.textContent = `Hola, ${usuario.nombre}`;
 
             botonLogin.hidden = true;
             botonRegistro.hidden = true;

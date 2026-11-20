@@ -1,5 +1,6 @@
 
-document.getElementById("registro-form").addEventListener("submit", async function(event) {
+document.getElementById("registro-form").addEventListener("submit", async (event) => {
+
     event.preventDefault();
 
     const nombre = document.getElementById("nombre").value.trim();
@@ -19,7 +20,8 @@ document.getElementById("registro-form").addEventListener("submit", async functi
         !/[A-Za-zÁÉÍÓÚáéíóúÑñ]/.test(clave) ||
         !/[0-9]/.test(clave)
     ) {
-        mensaje.textContent = "La contraseña debe tener mínimo 8 caracteres, letras y números.";
+        mensaje.textContent =
+            "La contraseña debe tener mínimo 8 caracteres, letras y números.";
         return;
     }
 
@@ -39,16 +41,23 @@ document.getElementById("registro-form").addEventListener("submit", async functi
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ nombre, correo, clave })
+            body: JSON.stringify({
+                nombre,
+                correo,
+                clave
+            })
         });
 
         const resultado = await respuesta.json();
 
         if (!respuesta.ok) {
-            throw new Error(resultado.detail || "Error al registrar usuario.");
+            throw new Error(
+                resultado.detail || "Error al registrar usuario."
+            );
         }
 
         mensaje.textContent = "¡Cuenta creada correctamente!";
+
         document.getElementById("registro-form").reset();
 
         setTimeout(() => {
