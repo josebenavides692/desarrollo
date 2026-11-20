@@ -1,78 +1,31 @@
 const formulario = document.getElementById("objetivo-form");
 const campos = document.getElementById("campos-objetivo");
-const paneles = [...formulario.querySelectorAll("[data-panel]")];
-const pasos = [...document.querySelectorAll("[data-paso]")];
 const campoPersonalizado = document.getElementById("campo-personalizado");
 const personalizado = document.getElementById("habito-personalizado");
 const hito = document.getElementById("hito");
-const fechaLimite = document.getElementById("fecha-limite");
-const privacidad = document.getElementById("privacidad");
 const mensaje = document.getElementById("mensaje-objetivo");
 const boton = document.getElementById("guardar-objetivo");
 const id = new URLSearchParams(window.location.search).get("id");
 const ruta = id ? `/objetivos/${encodeURIComponent(id)}` : "/objetivos";
-let paso = 0;
-let fechaOriginal = "";
-
-function datosObjetivo() {
-    const habito = formulario.elements.habito.value;
-    return {
-        habito: habito === "otro" ? personalizado.value.trim() : habito,
-        intencion: formulario.elements.intencion.value,
-        hito: hito.value.trim(),
-        fecha_limite: fechaLimite.value || null,
-        privacidad: privacidad.checked ? "privado" : "publico"
-    };
-}
-
-function mostrarResumen() {
-    const datos = datosObjetivo();
-    const filas = [
-        ["Hábito", nombreHabito(datos.habito)],
-        ["Intención", datos.intencion],
-        ["Meta", datos.hito],
-        ["Fecha límite", datos.fecha_limite || "Sin fecha límite"],
-        ["Privacidad", privacidad.checked ? "Privado" : "Preferencia pública; el contenido sigue en tu cuenta"]
-    ];
-    const resumen = document.getElementById("resumen");
-    resumen.replaceChildren(...filas.map(([nombre, valor]) => {
-        const fila = document.createElement("div");
-        const titulo = document.createElement("dt");
-        const detalle = document.createElement("dd");
-        titulo.textContent = nombre;
-        detalle.textContent = valor;
-        fila.append(titulo, detalle);
-        return fila;
-    }));
-}
-
-function mostrarPaso(indice) {
-    paso = indice;
-    paneles.forEach((panel, posicion) => { panel.hidden = posicion !== paso; });
-    pasos.forEach((elemento, posicion) => {
-        if (posicion === paso) elemento.setAttribute("aria-current", "step");
-        else elemento.removeAttribute("aria-current");
-        elemento.classList.toggle("completo", posicion < paso);
-    });
-    mensaje.textContent = "";
-    boton.textContent = paso === 2 ? "Guardar objetivo" : "Siguiente paso";
-    if (paso === 2) mostrarResumen();
-    paneles[paso].querySelector("h1").focus();
-}
+let fechaGuardada = null;
+let privacidadGuardada = "privado";
+let plazoModificado = false;
 
 function actualizarPersonalizado() {
     campoPersonalizado.hidden = formulario.elements.habito.value !== "otro";
+    personalizado.required = !campoPersonalizado.hidden;
+}
+
+function calcularFecha(plazo) {
+    const fecha = new Date();
+    fecha.setDate(fecha.getDate() + Number(plazo));
+    return [fecha.getFullYear(), fecha.getMonth() + 1, fecha.getDate()]
+        .map(numero => String(numero).padStart(2, "0")).join("-");
 }
 
 formulario.addEventListener("change", ({ target }) => {
     if (target.name === "habito") actualizarPersonalizado();
-    if (target.name === "plazo") hito.value = target.value;
-});
-
-const atras = document.getElementById("atras");
-atras.addEventListener("click", () => {
-    if (paso === 0) window.location.assign("/general.html#mis-objetivos");
-    else mostrarPaso(paso - 1);
+    if (target.name === "plazo") plazoModificado = true;
 });
 
 async function solicitar(opciones) {
@@ -88,36 +41,35 @@ async function solicitar(opciones) {
     return resultado;
 }
 
-formulario.noValidate = true;
+function habilitarFormulario(habilitado) {
+    campos.disabled = !habilitado;
+    boton.disabled = !habilitado;
+}
+
 formulario.addEventListener("submit", async evento => {
     evento.preventDefault();
     if (campos.disabled) return;
-    const datos = datosObjetivo();
-    if (paso === 0) {
-        if (!datos.habito || !datos.intencion) {
-            mensaje.textContent = !datos.habito ? "Elige o escribe un hábito." : "Elige tu intención principal.";
-            return;
-        }
-        mostrarPaso(1);
+
+    const opcion = formulario.elements.habito.value;
+    const habito = opcion === "otro" ? personalizado.value.trim() : opcion;
+    const meta = hito.value.trim();
+    if (!habito || !meta) {
+        mensaje.textContent = !habito ? "Describe el hábito que quieres trabajar." : "Escribe tu objetivo con tus palabras.";
+        (habito ? hito : personalizado).focus();
         return;
     }
-    if (paso === 1) {
-        if (!datos.hito || !hito.reportValidity() || !fechaLimite.reportValidity()) {
-            mensaje.textContent = "Escribe una meta y comprueba la fecha.";
-            return;
-        }
-        const hoy = new Date();
-        hoy.setHours(0, 0, 0, 0);
-        if (datos.fecha_limite && datos.fecha_limite !== fechaOriginal && new Date(`${datos.fecha_limite}T00:00:00`) < hoy) {
-            mensaje.textContent = "La fecha límite no puede estar en el pasado.";
-            return;
-        }
-        mostrarPaso(2);
-        return;
-    }
-    campos.disabled = true;
-    boton.disabled = true;
-    atras.disabled = true;
+
+    const plazo = formulario.elements.plazo.value;
+    const datos = {
+        habito,
+        intencion: formulario.elements.intencion.value,
+        hito: meta,
+        fecha_limite: !id || plazoModificado ? calcularFecha(plazo) : fechaGuardada,
+        privacidad: privacidadGuardada
+    };
+
+    habilitarFormulario(false);
+    mensaje.textContent = "";
     boton.textContent = "Guardando…";
     try {
         await solicitar({
@@ -128,10 +80,8 @@ formulario.addEventListener("submit", async evento => {
         window.location.assign("/general.html#mis-objetivos");
     } catch (error) {
         mensaje.textContent = error.message;
-        campos.disabled = false;
-        boton.disabled = false;
-        atras.disabled = false;
-        boton.textContent = "Guardar objetivo";
+        habilitarFormulario(true);
+        boton.textContent = "Guardar";
     }
 });
 
@@ -157,22 +107,20 @@ async function cargarObjetivo() {
             opcion.querySelector(".caja").lastChild.textContent = objetivo.intencion;
             grupo.append(opcion);
         }
-        formulario.elements.plazo.value = objetivo.hito;
+
         hito.value = objetivo.hito;
-        fechaOriginal = objetivo.fecha_limite || "";
-        fechaLimite.value = fechaOriginal;
-        privacidad.checked = objetivo.privacidad !== "publico";
-        paneles[0].querySelector("h1").textContent = "Edita tu objetivo";
-        campos.disabled = false;
-        boton.disabled = false;
+        fechaGuardada = objetivo.fecha_limite;
+        privacidadGuardada = objetivo.privacidad;
+        formulario.elements.plazo.value = "";
+        document.getElementById("plazo-actual").textContent = fechaGuardada
+            ? `Fecha límite actual: ${fechaGuardada}. Elige un plazo para cambiarla.`
+            : "Sin fecha límite. Elige un plazo para agregarla.";
+        document.querySelector("h1").textContent = "Edita tu objetivo";
+        habilitarFormulario(true);
     } catch (error) {
         mensaje.textContent = error.message;
     }
 }
 
-if (id) {
-    cargarObjetivo();
-} else {
-    campos.disabled = false;
-    boton.disabled = false;
-}
+if (id) cargarObjetivo();
+else habilitarFormulario(true);

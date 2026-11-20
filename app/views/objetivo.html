@@ -4,25 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tu objetivo · Moken</title>
-    <link rel="stylesheet" href="/static/css/objetivo.css">
-    <script defer src="/static/js/habitos.js"></script>
-    <script defer src="/static/js/objetivo.js"></script>
+    <link rel="stylesheet" href="/static/css/objetivo.css?v=2">
+    <script defer src="/static/js/objetivo.js?v=2"></script>
 </head>
 <body>
     <main class="tarjeta">
-        <ol class="pasos" aria-label="Progreso del formulario">
-            <li class="completo"><span aria-hidden="true">✓</span>Crear cuenta</li>
-            <li data-paso="0" aria-current="step"><span aria-hidden="true">2</span>Tu objetivo</li>
-            <li data-paso="1"><span aria-hidden="true">3</span>Tu meta</li>
-            <li data-paso="2"><span aria-hidden="true">4</span>Resumen</li>
-        </ol>
+        <h1>¿Qué te gustaría trabajar hoy?</h1>
+        <p class="subtitulo">Selecciona el hábito principal sobre el que deseas llevar control.</p>
 
         <form id="objetivo-form">
             <fieldset id="campos-objetivo" disabled>
-                <section data-panel>
-                    <h1 tabindex="-1">¿Qué te gustaría trabajar hoy?</h1>
-                    <p class="subtitulo">Selecciona el hábito principal sobre el que deseas llevar control.</p>
-                    <div class="habitos" role="group" aria-label="Hábito principal">
+                <div class="habitos" role="group" aria-label="Hábito principal">
                     <label><input type="radio" name="habito" value="Videojuegos" required><span class="caja"><span class="icono" aria-hidden="true">🎮</span>Videojuegos</span></label>
                     <label><input type="radio" name="habito" value="Pornografía" required><span class="caja"><span class="icono" aria-hidden="true">♡</span>Pornografía</span></label>
                     <label><input type="radio" name="habito" value="reducir_redes" required><span class="caja"><span class="icono" aria-hidden="true">▯</span>Redes sociales</span></label>
@@ -31,67 +23,44 @@
                     <label><input type="radio" name="habito" value="Apuestas" required><span class="caja"><span class="icono" aria-hidden="true">⚄</span>Apuestas</span></label>
                     <label><input type="radio" name="habito" value="Cafeína" required><span class="caja"><span class="icono" aria-hidden="true">☕</span>Cafeína</span></label>
                     <label><input type="radio" name="habito" value="otro" required><span class="caja"><span class="icono" aria-hidden="true">⊕</span>Otro</span></label>
+                </div>
+
+                <label class="campo" id="campo-personalizado" hidden>
+                    Describe el hábito
+                    <input id="habito-personalizado" type="text" maxlength="150">
+                </label>
+
+                <fieldset>
+                    <legend>¿Cuál es tu intención principal?</legend>
+                    <div class="intencion">
+                        <label><input type="radio" name="intencion" value="Dejarlo completamente" required><span class="caja"><span class="aro" aria-hidden="true"></span>Dejarlo completamente</span></label>
+                        <label><input type="radio" name="intencion" value="Reducirlo" required><span class="caja"><span class="aro" aria-hidden="true"></span>Reducirlo</span></label>
+                        <label><input type="radio" name="intencion" value="Hacer seguimiento" required><span class="caja"><span class="aro" aria-hidden="true"></span>Hacer seguimiento</span></label>
                     </div>
-                    <label class="campo" id="campo-personalizado" hidden>
-                        Describe el hábito
-                        <input id="habito-personalizado" type="text" maxlength="150">
-                    </label>
+                </fieldset>
 
-                    <fieldset>
-                        <legend>¿Cuál es tu intención principal?</legend>
-                        <div class="intencion">
-                    <label><input type="radio" name="intencion" value="Dejarlo completamente" required><span class="caja"><span class="aro" aria-hidden="true"></span>Dejarlo completamente</span></label>
-                    <label><input type="radio" name="intencion" value="Reducirlo" required><span class="caja"><span class="aro" aria-hidden="true"></span>Reducirlo</span></label>
-                    <label><input type="radio" name="intencion" value="Hacer seguimiento" required><span class="caja"><span class="aro" aria-hidden="true"></span>Hacer seguimiento</span></label>
-                        </div>
-                    </fieldset>
+                <fieldset>
+                    <legend>Primer hito de tiempo</legend>
+                    <div class="hitos">
+                        <label><input type="radio" name="plazo" value="7"><span class="caja">7 días</span></label>
+                        <label><input type="radio" name="plazo" value="14"><span class="caja">14 días</span></label>
+                        <label><input type="radio" name="plazo" value="30" checked><span class="caja">30 días</span></label>
+                        <label><input type="radio" name="plazo" value="60"><span class="caja">60 días</span></label>
+                        <label><input type="radio" name="plazo" value="90"><span class="caja">90 días</span></label>
+                    </div>
+                    <p id="plazo-actual"></p>
+                </fieldset>
 
-                    <fieldset>
-                        <legend>Primer hito de tiempo</legend>
-                        <div class="hitos">
-                    <label><input type="radio" name="plazo" value="7 días"><span class="caja">7 días</span></label>
-                    <label><input type="radio" name="plazo" value="14 días"><span class="caja">14 días</span></label>
-                    <label><input type="radio" name="plazo" value="30 días" checked><span class="caja">30 días</span></label>
-                    <label><input type="radio" name="plazo" value="60 días"><span class="caja">60 días</span></label>
-                    <label><input type="radio" name="plazo" value="90 días"><span class="caja">90 días</span></label>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend>Configuración de privacidad</legend>
-                        <label class="privacidad">
-                            <span class="icono-privado" aria-hidden="true">⊙</span>
-                            <span><strong>Proceso 100% privado</strong><small>Tus estadísticas y notas diarias solo son visibles para ti.</small></span>
-                            <input id="privacidad" type="checkbox" role="switch" checked>
-                            <span class="barra" aria-hidden="true"></span>
-                        </label>
-                    </fieldset>
-                </section>
-
-                <section data-panel hidden>
-                    <h1 tabindex="-1">Define tu meta</h1>
-                    <p class="subtitulo">Ajusta el hito a lo que quieres conseguir.</p>
-                    <label class="campo">
-                        ¿Qué quieres lograr?
-                        <input id="hito" type="text" required maxlength="200" value="30 días">
-                    </label>
-                    <label class="campo">
-                        Fecha límite (opcional)
-                        <input id="fecha-limite" type="date">
-                    </label>
-                </section>
-
-                <section data-panel hidden>
-                    <h1 tabindex="-1">Revisa tu objetivo</h1>
-                    <p class="subtitulo">Comprueba los datos antes de guardar.</p>
-                    <dl id="resumen"></dl>
-                </section>
-
+                <label class="campo meta">
+                    Escribe tu objetivo con tus palabras
+                    <textarea id="hito" rows="3" maxlength="200" required placeholder="Ej. Quiero usar las redes solo 30 minutos al día."></textarea>
+                </label>
             </fieldset>
+
             <p id="mensaje-objetivo" role="status"></p>
             <div class="botones">
-                <button type="button" id="atras" class="boton atras">Atrás</button>
-                <button type="submit" id="guardar-objetivo" class="boton siguiente" disabled>Siguiente paso</button>
+                <a href="/general.html#mis-objetivos" class="boton atras">Atrás</a>
+                <button type="submit" id="guardar-objetivo" class="boton siguiente" disabled>Guardar</button>
             </div>
         </form>
     </main>
