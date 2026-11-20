@@ -131,3 +131,14 @@ def inicializar_db():
             CREATE INDEX IF NOT EXISTS idx_objetivos_usuario
             ON objetivos(usuario_id)
         """)
+
+        conexion.execute("""
+            CREATE TABLE IF NOT EXISTS registros_diarios (
+                usuario_id INTEGER NOT NULL REFERENCES usuarios(id) ON DELETE CASCADE,
+                fecha TEXT NOT NULL,
+                resultado TEXT NOT NULL CHECK (resultado IN ('cumplida', 'dificil')),
+                estado TEXT,
+                nota TEXT NOT NULL,
+                PRIMARY KEY (usuario_id, fecha)
+            )
+        """)

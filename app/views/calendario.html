@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Calendario · Moken</title>
+    <link rel="stylesheet" href="/static/css/calendario.css">
+    <script defer src="/static/js/calendario.js"></script>
+</head>
+<body>
+    <aside class="lateral">
+        <a class="marca" href="/general.html">Moken</a>
+        <nav aria-label="Tu espacio">
+            <span class="rotulo">Tu espacio</span>
+            <a href="/general.html">▦ <span>Proceso</span></a>
+            <a href="/calendario.html" aria-current="page">▤ <span>Calendario</span></a>
+            <a href="/perfil.html">♙ <span>Mi perfil</span></a>
+        </nav>
+        <div class="ritmo">
+            <strong>A tu ritmo.</strong>
+            <p>Tu proceso no te define. Cada pequeño paso también es un avance.</p>
+        </div>
+        <button id="salir" type="button">Cerrar sesión</button>
+    </aside>
+    <main>
+        <header class="cabecera">
+            <div>
+                <h1>Calendario</h1>
+                <p>Cada día cuenta. Mira tu camino con calma, sin juicios.</p>
+            </div>
+            <a class="cuenta" href="/perfil.html" id="cuenta">Mi perfil</a>
+        </header>
+        <section class="resumen" aria-label="Resumen del proceso">
+            <article class="tarjeta"><h2>Racha actual</h2><strong id="racha">—</strong><p>Un paso cada día</p></article>
+            <article class="tarjeta"><h2>Registros del mes</h2><strong id="total">—</strong><p id="periodo">Mes visible</p></article>
+            <article class="tarjeta"><h2>Meta del proceso</h2><strong id="meta">—</strong><p id="plazo"></p></article>
+            <article class="tarjeta"><h2>Mi estado más frecuente</h2><strong id="estado-frecuente">—</strong><p id="frecuencia">En el mes visible</p></article>
+        </section>
+        <div class="acciones">
+            <a class="objetivo" id="objetivo" href="/objetivo.html">Mi objetivo</a>
+            <span>Tus notas son privadas</span>
+            <button class="primario" id="registrar" type="button">+ Registrar un día</button>
+        </div>
+        <p id="mensaje-pagina" role="alert" hidden></p>
+        <div class="paneles">
+            <section class="tarjeta calendario" aria-labelledby="mes">
+                <header>
+                    <h2 id="mes" aria-live="polite"></h2>
+                    <div class="navegacion">
+                        <button id="anterior" type="button" aria-label="Mes anterior">‹</button>
+                        <button id="hoy" type="button">Hoy</button>
+                        <button id="siguiente" type="button" aria-label="Mes siguiente">›</button>
+                    </div>
+                </header>
+                <div class="semana" aria-hidden="true">
+                    <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span>
+                    <span>Vie</span><span>Sáb</span><span>Dom</span>
+                </div>
+                <div id="dias" class="dias"></div>
+                <div class="leyenda"><span>✓ Meta cumplida</span><span>○ Día difícil</span><span>— Sin registro</span></div>
+                <p>Selecciona un día para consultar o editar tu registro.</p>
+            </section>
+            <section class="tarjeta editor" aria-labelledby="titulo-registro">
+                <p class="fecha" id="fecha-registro"></p>
+                <h2 id="titulo-registro">Tu registro del día</h2>
+                <form id="formulario">
+                    <fieldset id="campos" disabled>
+                        <fieldset>
+                            <legend>¿Cómo ha ido tu proceso?</legend>
+                            <div class="opciones resultado">
+                                <label><input type="radio" name="resultado" value="cumplida" required><span>✓ Meta cumplida</span></label>
+                                <label><input type="radio" name="resultado" value="dificil"><span>Día difícil</span></label>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>¿Cómo te sientes?</legend>
+                            <div class="opciones">
+                                <label><input type="radio" name="estado" value="calma"><span>En calma</span></label>
+                                <label><input type="radio" name="estado" value="energia"><span>Con energía</span></label>
+                                <label><input type="radio" name="estado" value="ansiedad"><span>Con ansiedad</span></label>
+                                <label><input type="radio" name="estado" value="desanimo"><span>Desanimado</span></label>
+                                <label><input type="radio" name="estado" value="" checked><span>Sin indicar</span></label>
+                            </div>
+                        </fieldset>
+                        <label for="nota">Una nota para ti (opcional)</label>
+                        <textarea id="nota" name="nota" rows="4" maxlength="2000"></textarea>
+                        <small>Solo tú puedes ver esta nota.</small>
+                        <button class="primario" type="submit">Guardar cambios</button>
+                    </fieldset>
+                    <p id="mensaje-registro" role="status"></p>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
