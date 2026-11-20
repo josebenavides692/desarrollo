@@ -1,118 +1,99 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis objetivos | Moken</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tu objetivo · Moken</title>
     <link rel="stylesheet" href="/static/css/objetivo.css">
+    <script defer src="/static/js/habitos.js"></script>
+    <script defer src="/static/js/objetivo.js"></script>
 </head>
-
 <body>
-    <main class="contenedor-objetivos">
-
-        <header class="encabezado">
-            <a href="/general.html#mis-objetivos" class="volver">← Mis objetivos</a>
-            <h1>Define tus objetivos</h1>
-            <p>
-                Establece lo que quieres conseguir y construye tu progreso
-                paso a paso.
-            </p>
-        </header>
+    <main class="tarjeta">
+        <ol class="pasos" aria-label="Progreso del formulario">
+            <li class="completo"><span aria-hidden="true">✓</span>Crear cuenta</li>
+            <li data-paso="0" aria-current="step"><span aria-hidden="true">2</span>Tu objetivo</li>
+            <li data-paso="1"><span aria-hidden="true">3</span>Tu meta</li>
+            <li data-paso="2"><span aria-hidden="true">4</span>Resumen</li>
+        </ol>
 
         <form id="objetivo-form">
+            <fieldset id="campos-objetivo" disabled>
+                <section data-panel>
+                    <h1 tabindex="-1">¿Qué te gustaría trabajar hoy?</h1>
+                    <p class="subtitulo">Selecciona el hábito principal sobre el que deseas llevar control.</p>
+                    <div class="habitos" role="group" aria-label="Hábito principal">
+                    <label><input type="radio" name="habito" value="Videojuegos" required><span class="caja"><span class="icono" aria-hidden="true">🎮</span>Videojuegos</span></label>
+                    <label><input type="radio" name="habito" value="Pornografía" required><span class="caja"><span class="icono" aria-hidden="true">♡</span>Pornografía</span></label>
+                    <label><input type="radio" name="habito" value="reducir_redes" required><span class="caja"><span class="icono" aria-hidden="true">▯</span>Redes sociales</span></label>
+                    <label><input type="radio" name="habito" value="Nicotina" required><span class="caja"><span class="icono" aria-hidden="true">♨</span>Nicotina</span></label>
+                    <label><input type="radio" name="habito" value="Alcohol" required><span class="caja"><span class="icono" aria-hidden="true">🍷</span>Alcohol</span></label>
+                    <label><input type="radio" name="habito" value="Apuestas" required><span class="caja"><span class="icono" aria-hidden="true">⚄</span>Apuestas</span></label>
+                    <label><input type="radio" name="habito" value="Cafeína" required><span class="caja"><span class="icono" aria-hidden="true">☕</span>Cafeína</span></label>
+                    <label><input type="radio" name="habito" value="otro" required><span class="caja"><span class="icono" aria-hidden="true">⊕</span>Otro</span></label>
+                    </div>
+                    <label class="campo" id="campo-personalizado" hidden>
+                        Describe el hábito
+                        <input id="habito-personalizado" type="text" maxlength="150">
+                    </label>
 
-            <section class="seccion">
-                <h2>1. ¿Qué hábito quieres trabajar?</h2>
-                <p>Selecciona el área en la que deseas concentrarte.</p>
+                    <fieldset>
+                        <legend>¿Cuál es tu intención principal?</legend>
+                        <div class="intencion">
+                    <label><input type="radio" name="intencion" value="Dejarlo completamente" required><span class="caja"><span class="aro" aria-hidden="true"></span>Dejarlo completamente</span></label>
+                    <label><input type="radio" name="intencion" value="Reducirlo" required><span class="caja"><span class="aro" aria-hidden="true"></span>Reducirlo</span></label>
+                    <label><input type="radio" name="intencion" value="Hacer seguimiento" required><span class="caja"><span class="aro" aria-hidden="true"></span>Hacer seguimiento</span></label>
+                        </div>
+                    </fieldset>
 
-                <label for="habito">Hábito principal</label>
-                <select id="habito" name="habito" required>
-                    <option value="">Selecciona una opción</option>
-                    <option value="reducir_redes">Reducir el uso de redes sociales</option>
-                    <option value="mejorar_sueno">Mejorar mis hábitos de sueño</option>
-                    <option value="actividad_fisica">Aumentar la actividad física</option>
-                    <option value="alimentacion">Mejorar mi alimentación</option>
-                    <option value="estudio">Mejorar mi concentración y estudio</option>
-                    <option value="otro">Otro hábito</option>
-                </select>
+                    <fieldset>
+                        <legend>Primer hito de tiempo</legend>
+                        <div class="hitos">
+                    <label><input type="radio" name="plazo" value="7 días"><span class="caja">7 días</span></label>
+                    <label><input type="radio" name="plazo" value="14 días"><span class="caja">14 días</span></label>
+                    <label><input type="radio" name="plazo" value="30 días" checked><span class="caja">30 días</span></label>
+                    <label><input type="radio" name="plazo" value="60 días"><span class="caja">60 días</span></label>
+                    <label><input type="radio" name="plazo" value="90 días"><span class="caja">90 días</span></label>
+                        </div>
+                    </fieldset>
 
-                <label for="habito-personalizado">
-                    Si elegiste otro, descríbelo
-                </label>
-                <input
-                    type="text"
-                    id="habito-personalizado"
-                    name="habito_personalizado"
-                    placeholder="Describe el hábito que quieres trabajar"
-                    maxlength="150"
-                >
-            </section>
+                    <fieldset>
+                        <legend>Configuración de privacidad</legend>
+                        <label class="privacidad">
+                            <span class="icono-privado" aria-hidden="true">⊙</span>
+                            <span><strong>Proceso 100% privado</strong><small>Tus estadísticas y notas diarias solo son visibles para ti.</small></span>
+                            <input id="privacidad" type="checkbox" role="switch" checked>
+                            <span class="barra" aria-hidden="true"></span>
+                        </label>
+                    </fieldset>
+                </section>
 
-            <section class="seccion">
-                <h2>2. ¿Cuál es tu intención?</h2>
-                <p>Explica qué quieres cambiar y por qué es importante.</p>
+                <section data-panel hidden>
+                    <h1 tabindex="-1">Define tu meta</h1>
+                    <p class="subtitulo">Ajusta el hito a lo que quieres conseguir.</p>
+                    <label class="campo">
+                        ¿Qué quieres lograr?
+                        <input id="hito" type="text" required maxlength="200" value="30 días">
+                    </label>
+                    <label class="campo">
+                        Fecha límite (opcional)
+                        <input id="fecha-limite" type="date">
+                    </label>
+                </section>
 
-                <label for="intencion">Mi intención</label>
-                <textarea
-                    id="intencion"
-                    name="intencion"
-                    rows="4"
-                    maxlength="500"
-                    placeholder="Quiero mejorar este hábito porque..."
-                    required
-                ></textarea>
-            </section>
+                <section data-panel hidden>
+                    <h1 tabindex="-1">Revisa tu objetivo</h1>
+                    <p class="subtitulo">Comprueba los datos antes de guardar.</p>
+                    <dl id="resumen"></dl>
+                </section>
 
-            <section class="seccion">
-                <h2>3. Establece un hito</h2>
-                <p>Define una meta concreta que puedas alcanzar.</p>
-
-                <label for="hito">Mi objetivo</label>
-                <input
-                    type="text"
-                    id="hito"
-                    name="hito"
-                    placeholder="Ej. Mantener una rutina durante 30 días"
-                    maxlength="200"
-                    required
-                >
-
-                <label for="fecha-limite">Fecha límite</label>
-                <input
-                    type="date"
-                    id="fecha-limite"
-                    name="fecha_limite"
-                >
-            </section>
-
-            <section class="seccion">
-                <h2>4. Configura tu privacidad</h2>
-                <p>Decide quién puede consultar tu progreso.</p>
-
-                <label for="privacidad">Visibilidad de mi progreso</label>
-                <select id="privacidad" name="privacidad" required>
-                    <option value="privado">Privado: solo yo</option>
-                    <option value="publico">Público: visible para otros</option>
-                </select>
-            </section>
-
-            <div id="mensaje-objetivo" role="status" aria-live="polite"></div>
-
-            <div class="acciones">
-                <a href="/general.html#mis-objetivos" class="boton-secundario">
-                    Cancelar
-                </a>
-
-                <button type="submit" id="guardar-objetivo">
-                    Guardar objetivo
-                </button>
+            </fieldset>
+            <p id="mensaje-objetivo" role="status"></p>
+            <div class="botones">
+                <button type="button" id="atras" class="boton atras">Atrás</button>
+                <button type="submit" id="guardar-objetivo" class="boton siguiente" disabled>Siguiente paso</button>
             </div>
-
         </form>
-
     </main>
-
-    <script src="/static/js/objetivo.js"></script>
 </body>
 </html>
