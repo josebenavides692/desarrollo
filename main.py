@@ -1,3 +1,6 @@
+import os
+from fastapi import FastAPI
+from app.models.database import inicializar_db
 from contextlib import asynccontextmanager
 from pathlib import Path
 from starlette.middleware.sessions import SessionMiddleware
