@@ -18,6 +18,7 @@ from app.controllers.auth_controller import router as auth_router
 from app.controllers.usuario_controller import router as usuario_router
 from app.controllers.events_controller import router as events_router
 from app.controllers.objetivos_controller import router as objetivos_router
+from app.controllers.calendario_controller import router as calendario_router
 
 # -------------------------
 # Base de datos
@@ -59,7 +60,6 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
-
 # -------------------------
 # Middleware de sesiones
 # -------------------------
@@ -82,6 +82,7 @@ app.include_router(auth_router)
 app.include_router(usuario_router)
 app.include_router(events_router)
 app.include_router(objetivos_router)
+app.include_router(calendario_router)
 
 
 # -------------------------
@@ -149,7 +150,9 @@ def pagina_general():
 
 @app.get("/objetivo.html")
 def pagina_objetivo():
+    return FileResponse(VIEWS_DIR / "objetivo.html")
 
-    return FileResponse(
-        VIEWS_DIR / "objetivo.html"
-    )
+
+@app.get("/calendario.html")
+def pagina_calendario():
+    return FileResponse(VIEWS_DIR / "calendario.html")

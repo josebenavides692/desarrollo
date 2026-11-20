@@ -1,0 +1,110 @@
+:root {
+    color: #2c3d30;
+    background: #f7f6f2;
+    font: 16px/1.45 system-ui, sans-serif;
+    --verde: #54735c;
+    --menta: #e5ede7;
+    --borde: #e5e2dc;
+    --suave: #f7f6f2;
+    --texto-secundario: #625f59;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; display: grid; grid-template-columns: 245px minmax(0, 1fr); min-height: 100vh; }
+button, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; }
+button:disabled { cursor: default; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 3px solid #a65e40; outline-offset: 3px; }
+h1, h2, p { margin: 0; }
+p { color: var(--texto-secundario); }
+
+.lateral {
+    background: #2c3d30;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 34px 20px 20px;
+    gap: 42px;
+}
+.marca { font-size: 1.35rem; font-weight: 750; padding-inline: 14px; }
+.marca::before { content: ""; display: inline-block; border-radius: 50%; width: 12px; height: 12px; background: #e3a38b; margin-right: 8px; }
+.rotulo { display: block; font-size: .72rem; text-transform: uppercase; padding: 0 14px 16px; color: #d3dfd5; }
+.lateral nav a { display: flex; gap: 14px; padding: 12px 14px; border-radius: 14px; margin-bottom: 7px; }
+.lateral nav a:hover, .lateral nav a[aria-current] { background: #405745; }
+.ritmo { background: #384d3b; border-radius: 18px; padding: 20px; margin-top: 32px; }
+.ritmo p { color: #dce6dd; font-size: .85rem; margin-top: 10px; }
+#salir { margin-top: auto; background: none; border: 0; color: inherit; text-align: left; padding: 12px 14px; }
+
+main { width: 100%; max-width: 1600px; margin: auto; padding: 42px clamp(20px, 3vw, 48px); }
+.cabecera, .acciones, .calendario header { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.cabecera { margin-bottom: 36px; }
+h1 { font-size: clamp(1.9rem, 3vw, 2.45rem); margin-bottom: 4px; }
+.cuenta, .objetivo, .navegacion button { background: #fff; border: 1px solid var(--borde); border-radius: 999px; padding: 10px 16px; color: inherit; font-weight: 650; }
+.resumen { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.tarjeta { background: #fff; border: 1px solid var(--borde); border-radius: 22px; padding: 22px; min-width: 0; }
+.resumen .tarjeta { padding: 17px 19px; }
+.resumen h2 { font-size: .71rem; text-transform: uppercase; color: var(--texto-secundario); }
+.resumen strong { font-size: 1.55rem; display: block; margin-block: 4px; overflow-wrap: anywhere; }
+.resumen p { font-size: .8rem; }
+#racha { color: var(--verde); }
+#meta { color: #665980; }
+#estado-frecuente { color: #466778; }
+.acciones { flex-wrap: wrap; justify-content: flex-start; margin-block: 22px; font-size: .85rem; }
+.acciones > span { color: var(--texto-secundario); }
+.acciones button { margin-left: auto; }
+.primario { background: var(--verde); color: white; border: 0; border-radius: 999px; padding: 11px 23px; font-weight: 700; }
+.primario:hover { background: #405d48; }
+.paneles { display: grid; grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr); gap: 22px; align-items: start; }
+.paneles h2 { font-size: 1.4rem; }
+.navegacion { display: flex; gap: 6px; }
+.navegacion button { padding: 7px 12px; }
+.semana, .dias { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 7px; }
+.semana { text-align: center; color: var(--texto-secundario); font-size: .74rem; font-weight: 700; margin: 26px 0 9px; }
+.dia { min-width: 0; min-height: 55px; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 6px 8px; background: var(--suave); border: 1px solid transparent; border-radius: 12px; font-weight: 650; color: inherit; }
+.dia.otro-mes { color: #68645f; }
+.dia.cumplida { background: var(--menta); }
+.dia.dificil { background: #f5e7e0; }
+.dia[aria-current="date"] { border-color: var(--verde); }
+.dia[aria-pressed="true"] { background: var(--verde); color: #fff; }
+.dia small { font-size: .69rem; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 24px; color: var(--texto-secundario); font-size: .8rem; }
+.calendario > p { margin-top: 8px; font-size: .8rem; }
+.editor .fecha { display: inline-block; border-radius: 99px; background: var(--menta); padding: 5px 12px; text-transform: uppercase; font-size: .72rem; font-weight: 700; color: #385342; margin-bottom: 14px; }
+fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.editor fieldset fieldset { margin-block: 17px; }
+.editor legend, .editor label[for] { font-weight: 650; font-size: .87rem; }
+.opciones { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+.opciones label { position: relative; cursor: pointer; }
+.opciones input { position: absolute; opacity: 0; }
+.opciones span { display: block; padding: 6px 12px; border-radius: 999px; background: var(--suave); font-size: .75rem; }
+.opciones input:checked + span { background: var(--menta); color: #385342; font-weight: 700; }
+.opciones input:focus-visible + span { outline: 3px solid #a65e40; outline-offset: 2px; }
+.resultado input:checked + span { background: var(--verde); color: white; }
+.editor textarea { display: block; width: 100%; margin: 8px 0; padding: 10px; border: 1px solid var(--borde); border-radius: 12px; background: var(--suave); resize: vertical; }
+.editor small, #mensaje-registro { font-size: .8rem; }
+.editor .primario { display: block; width: 100%; margin-top: 14px; }
+#mensaje-registro:not(:empty) { margin-top: 9px; }
+[role="alert"] { margin-bottom: 12px; color: #893e29; }
+
+@media (max-width: 1150px) {
+    body { grid-template-columns: 175px minmax(0, 1fr); }
+    .resumen { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+    .paneles { grid-template-columns: 1fr; }
+}
+@media (max-width: 620px) {
+    body { display: block; }
+    .lateral { padding: 12px; display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px; align-items: center; }
+    .lateral nav { display: flex; order: 3; width: 100%; }
+    .lateral nav a { font-size: .8rem; padding: 7px 9px; gap: 5px; margin: 0; }
+    #salir { margin: 0 0 0 auto; }
+    .rotulo, .ritmo { display: none; }
+    main { padding: 22px 12px; }
+    .tarjeta { padding: 12px; }
+    .resumen, .paneles { gap: 10px; }
+    .dia { padding: 4px; min-height: 46px; }
+    .semana, .dias { gap: 3px; }
+}
