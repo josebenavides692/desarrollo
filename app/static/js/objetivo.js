@@ -1,0 +1,145 @@
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const formulario = document.getElementById("objetivo-form");
+    const habito = document.getElementById("habito");
+    const habitoPersonalizado = document.getElementById("habito-personalizado");
+    const intencion = document.getElementById("intencion");
+    const hito = document.getElementById("hito");
+    const fechaLimite = document.getElementById("fecha-limite");
+    const privacidad = document.getElementById("privacidad");
+    const mensaje = document.getElementById("mensaje-objetivo");
+    const botonGuardar = document.getElementById("guardar-objetivo");
+
+    // Mostrar u ocultar el campo de hábito personalizado.
+    habito.addEventListener("change", () => {
+
+        const seleccionarOtro = habito.value === "otro";
+
+        habitoPersonalizado.style.display =
+            seleccionarOtro ? "block" : "none";
+
+        habitoPersonalizado.required = seleccionarOtro;
+
+        if (!seleccionarOtro) {
+            habitoPersonalizado.value = "";
+        }
+    });
+
+    // Mostrar mensajes al usuario.
+    function mostrarMensaje(texto, tipo = "error") {
+        mensaje.textContent = texto;
+        mensaje.className = tipo;
+    }
+
+    // Validar que la fecha no sea anterior al día actual.
+    function validarFecha(fecha) {
+
+        if (!fecha) {
+            return true;
+        }
+
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0);
+
+        const fechaSeleccionada = new Date(`${fecha}T00:00:00`);
+
+        return fechaSeleccionada >= hoy;
+    }
+
+    // Enviar el objetivo al backend.
+    formulario.addEventListener("submit", async (event) => {
+
+        event.preventDefault();
+
+        mostrarMensaje("");
+
+        const nombreHabito =
+            habito.value === "otro"
+                ? habitoPersonalizado.value.trim()
+                : habito.value;
+
+        if (!nombreHabito) {
+            mostrarMensaje("Debes seleccionar o escribir un hábito.");
+            return;
+        }
+
+        if (intencion.value.trim().length < 5) {
+            mostrarMensaje("Describe tu intención con un poco más de detalle.");
+            return;
+        }
+
+        if (!hito.value.trim()) {
+            mostrarMensaje("Debes establecer un objetivo.");
+            return;
+        }
+
+        if (!validarFecha(fechaLimite.value)) {
+            mostrarMensaje("La fecha límite no puede estar en el pasado.");
+            return;
+        }
+
+        const datosObjetivo = {
+            habito: nombreHabito,
+            intencion: intencion.value.trim(),
+            hito: hito.value.trim(),
+            fecha_limite: fechaLimite.value || null,
+            privacidad: privacidad.value
+        };
+
+        botonGuardar.disabled = true;
+        botonGuardar.textContent = "Guardando...";
+
+        try {
+
+            const respuesta = await fetch("/objetivos", {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datosObjetivo)
+            });
+
+            if (respuesta.status === 401) {
+                window.location.href = "/login.html";
+                return;
+            }
+
+            const resultado = await respuesta.json();
+
+            if (!respuesta.ok) {
+                throw new Error(
+                    resultado.detail || "No se pudo guardar el objetivo."
+                );
+            }
+
+            mostrarMensaje(
+                "Objetivo guardado correctamente.",
+                "exito"
+            );
+
+            formulario.reset();
+            habitoPersonalizado.style.display = "none";
+            habitoPersonalizado.required = false;
+
+        } catch (error) {
+
+            console.error("Error al guardar el objetivo:", error);
+
+            mostrarMensaje(
+                error.message === "Failed to fetch"
+                    ? "No se pudo conectar con el servidor. Comprueba que esté funcionando."
+                    : error.message
+            );
+
+        } finally {
+
+            botonGuardar.disabled = false;
+            botonGuardar.textContent = "Guardar objetivo";
+
+        }
+
+    });
+
+});
