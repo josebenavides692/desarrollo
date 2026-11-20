@@ -1,17 +1,16 @@
 
-
 document.getElementById("registro-form").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    let nombre = document.getElementById("nombre").value.trim();
-    let correo = document.getElementById("correo").value.trim().toLowerCase();
-    let clave = document.getElementById("clave").value;
-    let clave2 = document.getElementById("clave2").value;
-    let terminos = document.getElementById("terminos").checked;
-    let mensaje = document.getElementById("mensaje-registro");
+    const nombre = document.getElementById("nombre").value.trim();
+    const correo = document.getElementById("correo").value.trim().toLowerCase();
+    const clave = document.getElementById("clave").value;
+    const clave2 = document.getElementById("clave2").value;
+    const terminos = document.getElementById("terminos").checked;
+    const mensaje = document.getElementById("mensaje-registro");
 
-    if (nombre === "") {
-        mensaje.textContent = "Escribe tu nombre.";
+    if (nombre.length < 2) {
+        mensaje.textContent = "El nombre debe tener al menos 2 caracteres.";
         return;
     }
 
@@ -34,29 +33,13 @@ document.getElementById("registro-form").addEventListener("submit", async functi
         return;
     }
 
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    let existe = usuarios.find(function(usuario) {
-        return usuario.correo === correo;
-    });
-
-    if (existe) {
-        mensaje.textContent = "Este correo ya está registrado.";
-        return;
-    }
-
-
     try {
-    const respuesta = await fetch("/usuarios", {
-        method: "POST",
-        headers: {
-              "Content-Type": "application/json"
-         },
-          body: JSON.stringify({
-            nombre,
-           correo,
-           clave
-          })
+        const respuesta = await fetch("/usuarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nombre, correo, clave })
         });
 
         const resultado = await respuesta.json();
@@ -66,7 +49,6 @@ document.getElementById("registro-form").addEventListener("submit", async functi
         }
 
         mensaje.textContent = "¡Cuenta creada correctamente!";
-
         document.getElementById("registro-form").reset();
 
         setTimeout(() => {
@@ -76,5 +58,4 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     } catch (error) {
         mensaje.textContent = error.message;
     }
-});
 });
