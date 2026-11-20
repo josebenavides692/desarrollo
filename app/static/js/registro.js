@@ -34,29 +34,13 @@ document.getElementById("registro-form").addEventListener("submit", async functi
         return;
     }
 
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    let existe = usuarios.find(function(usuario) {
-        return usuario.correo === correo;
-    });
-
-    if (existe) {
-        mensaje.textContent = "Este correo ya está registrado.";
-        return;
-    }
-
-
     try {
-    const respuesta = await fetch("/usuarios", {
-        method: "POST",
-        headers: {
-              "Content-Type": "application/json"
-         },
-          body: JSON.stringify({
-            nombre,
-           correo,
-           clave
-          })
+        const respuesta = await fetch("/usuarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nombre, correo, clave })
         });
 
         const resultado = await respuesta.json();
@@ -76,5 +60,4 @@ document.getElementById("registro-form").addEventListener("submit", async functi
     } catch (error) {
         mensaje.textContent = error.message;
     }
-});
 });

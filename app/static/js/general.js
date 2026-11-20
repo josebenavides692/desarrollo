@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Cerrar sesión
     botonesSalir.forEach(boton => {
-        boton.addEventListener("click", async () => {
+        boton.addEventListener("click", async evento => {
+            evento.preventDefault();
 
             try {
                 const respuesta = await fetch("/logout", {

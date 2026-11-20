@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Comprobar si existe una sesión
     try {
-        const respuesta = await fetch("/perfil", {
+        const respuesta = await fetch("/usuarios/me", {
             credentials: "same-origin"
         });
 
