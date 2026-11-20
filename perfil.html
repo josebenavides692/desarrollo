@@ -1,50 +1,214 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi perfil</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="perfil.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moken - Mi perfil</title>
+  <link rel="stylesheet" href="general.css">
+  <link rel="stylesheet" href="perfil.css">
 </head>
 <body>
-    <header class="perfil-header">
-        <a href="principal.html">Inicio</a>
-        <nav>
-            <a href="perfil.html" aria-current="page">Mi perfil</a>
-            <a href="principal.html">Volver</a>
-        </nav>
+
+<div class="layout">
+
+  <!-- ===== Menú lateral ===== -->
+  <aside class="menu-lateral">
+
+    <h2 class="logo"><span class="punto-logo"></span>Moken</h2>
+
+    <nav>
+      <p class="menu-titulo">Tu espacio</p>
+      <ul>
+        <li><a href="general.html" class="menu-link"><span class="menu-icono">&#9638;</span>Mi proceso</a></li>
+        <li><a href="#" class="menu-link"><span class="menu-icono">&#128197;</span>Calendario</a></li>
+        <li><a href="perfil.html" class="menu-link activo"><span class="menu-icono">&#128100;</span>Mi perfil</a></li>
+      </ul>
+    </nav>
+
+    <div class="menu-frase">
+      <strong>A tu ritmo.</strong>
+      <p>Tu proceso no te define. Cada pequeño paso también es un avance.</p>
+    </div>
+
+    <nav class="menu-cuenta">
+      <p class="menu-titulo">Cuenta</p>
+      <ul>
+        <li><a href="principal.html" class="menu-link cerrar-sesion"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
+      </ul>
+    </nav>
+
+  </aside>
+
+  <!-- ===== Contenido principal ===== -->
+  <main class="contenido">
+
+    <header class="encabezado">
+      <div>
+        <h1>Mi perfil</h1>
+        <p class="frase">Un espacio a tu medida, con el control siempre en tus manos.</p>
+      </div>
+      <div class="usuario">
+        <span class="avatar" id="avatar-header">&#128100;</span>
+        <span id="nombre-usuario">Mi cuenta</span>
+      </div>
     </header>
 
-    <main class="perfil-container">
-        <section class="perfil-card">
-            <h1>Mi perfil</h1>
-            <p>Consulta y actualiza tus datos personales.</p>
+    <!-- Tarjeta superior de perfil -->
+    <section class="tarjeta perfil-banner">
+      <div class="perfil-identidad">
+        <div class="perfil-avatar-grande" id="avatar-perfil">&#128100;</div>
+        <div>
+          <h2 id="perfil-nombre-titulo">Mi cuenta</h2>
+          <p class="perfil-sub">Tu perfil personal &middot; Proceso privado</p>
+        </div>
+      </div>
 
-            <form id="perfil-form">
-                <label for="nombre">Nombre completo</label>
-                <input id="nombre" name="nombre"
-                       type="text" maxlength="100" required>
+      <div>
+        <input type="file" id="input-foto" accept="image/*" hidden>
+        <button type="button" class="boton-cambiar-foto" id="btn-cambiar-foto">Cambiar foto</button>
+      </div>
+    </section>
 
-                <label for="correo">Correo electrónico</label>
-                <input id="correo" name="correo"
-                       type="email" maxlength="254" required>
+    <!-- Grid principal de dos columnas -->
+    <section class="perfil-grid">
 
-                <label for="telefono">Teléfono (opcional)</label>
-                <input id="telefono" name="telefono"
-                       type="tel" maxlength="25">
+      <!-- Columna izquierda -->
+      <div class="perfil-columna">
 
-                <button type="submit">Guardar cambios</button>
-                <p id="mensaje" role="status" aria-live="polite"></p>
-            </form>
-        </section>
-    </main>
+        <!-- Datos personales -->
+        <div class="tarjeta">
+          <h2 class="perfil-card-titulo">Datos personales</h2>
+          <p class="perfil-card-sub">Cómo quieres que te llamemos y dónde contactarte.</p>
 
-    <footer class="perfil-footer">
-        <p>Mi perfil de usuario</p>
-    </footer>
+          <div class="perfil-fila-inputs">
+            <div class="perfil-campo">
+              <label for="input-nombre">Nombre</label>
+              <input type="text" id="input-nombre" placeholder="Tu nombre">
+            </div>
+            <div class="perfil-campo">
+              <label for="input-apellidos">Apellidos</label>
+              <input type="text" id="input-apellidos" placeholder="Tus apellidos">
+            </div>
+          </div>
 
-    <script src="perfil.js"></script>
+          <div class="perfil-campo">
+            <label for="input-correo">Correo electrónico</label>
+            <input type="email" id="input-correo" placeholder="correo@ejemplo.com">
+          </div>
+
+          <p class="perfil-nota">Tu correo no se mostrará a otras personas.</p>
+        </div>
+
+        <!-- Privacidad y bienestar -->
+        <div class="tarjeta">
+          <h2 class="perfil-card-titulo">Privacidad y bienestar</h2>
+          <p class="perfil-card-sub">Tus registros, notas y objetivos son solo tuyos.</p>
+
+          <div class="perfil-toggle-fila">
+            <div>
+              <strong>Ocultar detalles sensibles</strong>
+              <p>No mostrar el hábito en resúmenes y notificaciones.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-sensibles">
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="perfil-toggle-fila borde-arriba">
+            <div>
+              <strong>Consejos personalizados</strong>
+              <p>Recibir sugerencias según mis registros y preferencias.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-consejos" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna derecha -->
+      <div class="perfil-columna">
+
+        <!-- Tu proceso actual -->
+        <div class="tarjeta tarjeta-proceso-actual">
+          <h2 class="perfil-card-titulo">Tu proceso actual</h2>
+
+          <strong class="proceso-habito" id="proceso-habito">Sin elegir</strong>
+          <p class="proceso-meta">Dejarlo completamente &middot; Meta de 30 días</p>
+
+          <span class="proceso-dias" id="proceso-dias">0 de 30 días</span>
+          <div class="barra-progreso">
+            <div class="barra-progreso-relleno" id="proceso-barra" style="width: 0%;"></div>
+          </div>
+
+          <a href="general.html" class="perfil-enlace-proceso">Ver o ajustar desde Proceso &rarr;</a>
+        </div>
+
+        <!-- Tus preferencias -->
+        <div class="tarjeta">
+          <h2 class="perfil-card-titulo">Tus preferencias</h2>
+
+          <div class="perfil-toggle-fila sin-padding-arriba">
+            <div>
+              <strong>Recordatorio diario</strong>
+              <p>Un momento para registrar tu día.</p>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="toggle-recordatorio" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="perfil-fila-inputs">
+            <div class="perfil-campo">
+              <label for="input-hora">Hora del recordatorio</label>
+              <input type="time" id="input-hora" value="21:00">
+            </div>
+            <div class="perfil-campo">
+              <label for="select-frecuencia">Frecuencia</label>
+              <select id="select-frecuencia">
+                <option value="Todos los días">Todos los días</option>
+                <option value="Entre semana">Entre semana</option>
+                <option value="Fines de semana">Fines de semana</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="perfil-fila-inputs">
+            <div class="perfil-campo">
+              <label for="select-idioma">Idioma</label>
+              <select id="select-idioma">
+                <option value="Español">Español</option>
+                <option value="Inglés">Inglés</option>
+              </select>
+            </div>
+            <div class="perfil-campo">
+              <label for="select-zona">Zona horaria</label>
+              <select id="select-zona">
+                <option value="Bogotá (UTC-5)">Bogotá (UTC-5)</option>
+                <option value="Ciudad de México (UTC-6)">Ciudad de México (UTC-6)</option>
+                <option value="Buenos Aires (UTC-3)">Buenos Aires (UTC-3)</option>
+                <option value="Madrid (UTC+1)">Madrid (UTC+1)</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="perfil-nota">Hora local para tus registros y avisos.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="general.js"></script>
+<script src="perfil.js"></script>
+
 </body>
 </html>
