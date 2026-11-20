@@ -20,3 +20,4 @@ bin/
 obj/ 
 deploy.zip 
 EOF 
+usuarios.db
