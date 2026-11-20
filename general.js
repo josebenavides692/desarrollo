@@ -9,7 +9,6 @@ if (!sesion) {
     document.getElementById("nombre-usuario").textContent = sesion.nombre;
 }
 
-// Cerrar sesión: borra la sesión (el enlace se encarga de llevar a la otra página)
 let botones = document.querySelectorAll(".cerrar-sesion");
 
 for (let i = 0; i < botones.length; i++) {
