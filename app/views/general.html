@@ -1,201 +1,173 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Moken - Mi proceso</title>
-  <link rel="stylesheet" href="/static/css/general.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moken - Mi proceso</title>
+    <link rel="stylesheet" href="/static/css/general.css">
 </head>
 <body>
 
 <div class="layout">
 
-  <!-- ===== Menú lateral ===== -->
-  <aside class="menu-lateral">
+    <aside class="menu-lateral">
+        <h2 class="logo"><span class="punto-logo"></span>Moken</h2>
 
-    <h2 class="logo"><span class="punto-logo"></span>Moken</h2>
+        <nav>
+            <p class="menu-titulo">Mi proceso</p>
+            <ul>
+                <li>
+                    <a href="/general.html" class="menu-link activo">
+                        <span class="menu-icono">&#9638;</span>Mi proceso
+                    </a>
+                </li>
+                <li><a href="#eventos" class="menu-link">Mis eventos</a></li>
+                <li><a href="#nuevo-evento" class="menu-link">Crear evento</a></li>
+                <li><a href="/objetivo.html" class="menu-link">Mi objetivo</a></li>
+            </ul>
 
-    <nav>
-      <p class="menu-titulo">Mi proceso</p>
-      <ul>
-        <li><a href="/general.html" class="menu-link activo"><span class="menu-icono">&#9638;</span>Mi proceso</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128197;</span>Calendario</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128202;</span>Mi progreso</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#127941;</span>Logros</a></li>
-      </ul>
+            <p class="menu-titulo">Mi espacio</p>
+            <ul>
+                <li><a href="/perfil.html" class="menu-link">Mi perfil</a></li>
+            </ul>
+        </nav>
 
-      <p class="menu-titulo">Comunidad</p>
-      <ul>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128101;</span>Amigos</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128172;</span>Mis grupos</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128269;</span>Explorar</a></li>
-      </ul>
+        <nav class="menu-cuenta">
+            <p class="menu-titulo">Cuenta</p>
+            <ul>
+                <li>
+                    <button type="button" class="menu-link cerrar-sesion">
+                        Cerrar sesión
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 
-      <p class="menu-titulo">Mi espacio</p>
-      <ul>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#128214;</span>Mi diario</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#127891;</span>Recursos</a></li>
-      </ul>
-    </nav>
+    <main class="contenido">
 
-    <nav class="menu-cuenta">
-      <p class="menu-titulo">Cuenta</p>
-      <ul>
-        <li><a href="/perfil.html" class="menu-link"><span class="menu-icono">&#128100;</span>Mi perfil</a></li>
-        <li><a href="#" class="menu-link"><span class="menu-icono">&#9881;</span>Configuración</a></li>
-        <li><a href="/" class="menu-link cerrar-sesion"><span class="menu-icono">&#8618;</span>Cerrar sesión</a></li>
-        <button type="button" class="menu-link cerrar-sesion">
-        Cerrar sesión
-        </button>
-      </ul>
-    </nav>
+        <header class="encabezado">
+            <div>
+                <h1>Mi proceso</h1>
+                <p class="frase">
+                    Un día a la vez es todo lo que necesitas hacer hoy.
+                </p>
+            </div>
 
-  </aside>
+            <div class="usuario">
+                <span class="avatar">&#128100;</span>
+                <span id="nombre-usuario">Cargando usuario...</span>
+            </div>
+        </header>
 
-  <!-- ===== Contenido principal ===== -->
-  <main class="contenido">
+        <section class="tarjeta tarjeta-progreso">
+            <div class="progreso-texto">
+                <div class="tags">
+                    <span class="tag tag-habito">Moken</span>
+                    <span class="tag tag-privado">Espacio personal</span>
+                </div>
 
-    <header class="encabezado">
-      <div>
-        <h1>Buenos días</h1>
-        <p class="frase">"Un día a la vez es todo lo que necesitas hacer hoy."</p>
-      </div>
-      <div class="usuario">
-        <span class="avatar">&#128100;</span>
-        <span id="nombre-usuario">Mi cuenta</span>
-        <a href="/" class="tag tag-habito cerrar-sesion">Cerrar sesión</a>
-      </div>
-      <button type="button" class="tag tag-habito cerrar-sesion">
-      Cerrar sesión
-      </button>
-    </header>
+                <h2>Organiza tu proceso</h2>
+                <p>
+                    Aquí puedes registrar y administrar tus eventos.
+                    Cada evento queda asociado a tu cuenta y se almacena
+                    en la base de datos.
+                </p>
+            </div>
+        </section>
 
-    <!-- Tarjeta de progreso -->
-    <section class="tarjeta tarjeta-progreso">
-      <div class="circulo-progreso">
-        <div class="circulo-interior">
-          <strong>0</strong>
-          <span>/ 30 d</span>
-        </div>
-      </div>
+        <section class="stats">
+            <div class="tarjeta stat">
+                <span class="stat-etiqueta">Eventos registrados</span>
+                <strong class="stat-valor verde" id="total-eventos">0</strong>
+                <span class="stat-nota">Total de eventos</span>
+            </div>
 
-      <div class="progreso-texto">
-        <div class="tags">
-          <span class="tag tag-habito">Hábito: Sin elegir</span>
-          <span class="tag tag-privado">Privado</span>
-        </div>
-        <h2>Tu proceso empieza hoy</h2>
-        <p>
-          Este es tu primer día. Elige el hábito que quieres trabajar y registra
-          cómo te fue hoy. Cada día cuenta y no tienes que hacerlo perfecto.
-        </p>
-      </div>
-    </section>
+            <div class="tarjeta stat">
+                <span class="stat-etiqueta">Próximos eventos</span>
+                <strong class="stat-valor azul" id="proximos-eventos">0</strong>
+                <span class="stat-nota">Con fecha futura</span>
+            </div>
+        </section>
 
-    <!-- Estadísticas -->
-    <section class="stats">
-      <div class="tarjeta stat">
-        <span class="stat-etiqueta">Racha actual</span>
-        <strong class="stat-valor verde">0 días</strong>
-        <span class="stat-nota">Meta: 30 días</span>
-      </div>
-      <div class="tarjeta stat">
-        <span class="stat-etiqueta">Mejor racha</span>
-        <strong class="stat-valor naranja">0 días</strong>
-        <span class="stat-nota">Aún sin registros</span>
-      </div>
-      <div class="tarjeta stat">
-        <span class="stat-etiqueta">Días registrados</span>
-        <strong class="stat-valor azul">0 días</strong>
-        <span class="stat-nota">Total histórico</span>
-      </div>
-      <div class="tarjeta stat">
-        <span class="stat-etiqueta">Cumplimiento</span>
-        <strong class="stat-valor morado">--</strong>
-        <span class="stat-nota">Tasa de constancia</span>
-      </div>
-    </section>
+        <section class="tarjeta registro" id="nuevo-evento">
+            <h2 id="titulo-formulario">Registrar un evento</h2>
 
-    <!-- Registro del día + calendario -->
-    <section class="fila-doble">
+            <form id="evento-form">
+                <div class="campo">
+                    <label for="evento-nombre">Nombre del evento</label>
+                    <input
+                        type="text"
+                        id="evento-nombre"
+                        maxlength="150"
+                        required
+                        placeholder="Ej. Primer día de seguimiento"
+                    >
+                </div>
 
-      <div class="columna-izquierda">
+                <div class="campo">
+                    <label for="evento-descripcion">Descripción</label>
+                    <textarea
+                        id="evento-descripcion"
+                        rows="3"
+                        placeholder="Describe el evento..."
+                    ></textarea>
+                </div>
 
-        <div class="tarjeta registro">
-          <h3>¿Cómo fue tu día de hoy?</h3>
+                <div class="campo">
+                    <label for="evento-fecha">Fecha</label>
+                    <input type="date" id="evento-fecha">
+                </div>
 
-          <div class="opciones-dia">
-            <button class="opcion-dia">&#9745; Día limpio &#10003;</button>
-            <button class="opcion-dia">&#9888; Tuve una recaída</button>
-          </div>
+                <div class="campo">
+                    <label for="evento-lugar">Lugar</label>
+                    <input
+                        type="text"
+                        id="evento-lugar"
+                        maxlength="150"
+                        placeholder="Lugar (opcional)"
+                    >
+                </div>
 
-          <input type="text" class="notas" placeholder="Escribe notas de tu día si te sientes con ganas... (opcional)">
+                <button type="submit" class="boton-guardar" id="boton-guardar">
+                    Guardar evento
+                </button>
 
-          <button class="boton-guardar">Guardar registro</button>
-        </div>
+                <button
+                    type="button"
+                    id="cancelar-edicion"
+                    hidden
+                >
+                    Cancelar edición
+                </button>
+
+                <p id="mensaje-eventos" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <section class="tarjeta calendario" id="eventos">
+            <div class="calendario-header">
+                <h2>Mis eventos</h2>
+                <button type="button" id="recargar-eventos">
+                    Actualizar
+                </button>
+            </div>
+
+            <div id="lista-eventos" aria-live="polite">
+                <p>Cargando eventos...</p>
+            </div>
+        </section>
 
         <div class="reflexion">
-          <span class="reflexion-titulo">Reflexión de hoy</span>
-          <p>"No miras la montaña completa. Solo enfócate en el paso que estás dando en este instante."</p>
+            <span class="reflexion-titulo">Recuerda</span>
+            <p>
+                El progreso se construye paso a paso. Mantén organizadas
+                tus actividades y objetivos.
+            </p>
         </div>
 
-      </div>
-
-      <div class="tarjeta calendario">
-        <div class="calendario-header">
-          <h3>Calendario Mensual</h3>
-          <span class="mes">Octubre 2026</span>
-        </div>
-
-        <div class="calendario-grid">
-          <div class="cal-dia cal-previo"><span class="cal-letra">L</span>28</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>29</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>30</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">J</span>1</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">V</span>2</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">S</span>3</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">D</span>4</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">L</span>5</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>6</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>7</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">J</span>8</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">V</span>9</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">S</span>10</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">D</span>11</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">L</span>12</div>
-          <div class="cal-dia cal-previo"><span class="cal-letra">M</span>13</div>
-          <div class="cal-dia cal-hoy"><span class="cal-letra">M</span>14</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">J</span>15</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">V</span>16</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">S</span>17</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">D</span>18</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">L</span>19</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>20</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>21</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">J</span>22</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">V</span>23</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">S</span>24</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">D</span>25</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">L</span>26</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>27</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">M</span>28</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">J</span>29</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">V</span>30</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">S</span>31</div>
-          <div class="cal-dia cal-proximo"><span class="cal-letra">D</span>1</div>
-        </div>
-
-        <div class="leyenda">
-          <span><i class="punto limpio"></i>Limpio</span>
-          <span><i class="punto recaida"></i>Recaída</span>
-          <span><i class="punto proximo"></i>Próximo</span>
-        </div>
-      </div>
-
-    </section>
-
-  </main>
-
+    </main>
 </div>
 
 <script src="/static/js/general.js"></script>
