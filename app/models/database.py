@@ -3,24 +3,38 @@ import os
 import sqlite3
 from pathlib import Path
 
-# Directorio principal del proyecto
+
+# -------------------------
+# Configuración de la base de datos
+# -------------------------
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 
-# Ubicación de la base de datos
 DB_PATH = Path(
     os.getenv("DATABASE_PATH", str(BASE_DIR / "usuarios.db"))
 )
 
 
+# -------------------------
+# Conexión con SQLite
+# -------------------------
+
 def conectar_db():
+
     conexion = sqlite3.connect(DB_PATH)
+
     conexion.row_factory = sqlite3.Row
 
-    # Activar las claves foráneas de SQLite
+    # Activar claves foráneas
     conexion.execute("PRAGMA foreign_keys = ON")
 
     return conexion
 
+
+# -------------------------
+# Inicialización de la base
+# de datos y sus tablas
+# -------------------------
 
 def inicializar_db():
 
@@ -28,7 +42,10 @@ def inicializar_db():
 
     with conectar_db() as conexion:
 
+        # -------------------------
         # Tabla de usuarios
+        # -------------------------
+
         conexion.execute("""
             CREATE TABLE IF NOT EXISTS usuarios (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,7 +56,10 @@ def inicializar_db():
             )
         """)
 
+        # -------------------------
         # Tabla de eventos
+        # -------------------------
+
         conexion.execute("""
             CREATE TABLE IF NOT EXISTS eventos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -56,16 +76,21 @@ def inicializar_db():
             )
         """)
 
-        # Migración para bases de datos existentes
-        columnas = conexion.execute(
+        # -------------------------
+        # Migración de eventos
+        # para bases de datos anteriores
+        # -------------------------
+
+        columnas_eventos = conexion.execute(
             "PRAGMA table_info(eventos)"
         ).fetchall()
 
-        nombres_columnas = [
-            columna["name"] for columna in columnas
+        nombres_columnas_eventos = [
+            columna["name"]
+            for columna in columnas_eventos
         ]
 
-        if "usuario_id" not in nombres_columnas:
+        if "usuario_id" not in nombres_columnas_eventos:
 
             conexion.execute("""
                 ALTER TABLE eventos
@@ -74,8 +99,35 @@ def inicializar_db():
                 ON DELETE CASCADE
             """)
 
-        # Índice para consultar eventos por propietario
+        # Índice de eventos por usuario
         conexion.execute("""
             CREATE INDEX IF NOT EXISTS idx_eventos_usuario
             ON eventos(usuario_id)
+        """)
+
+        # -------------------------
+        # Tabla de objetivos
+        # -------------------------
+
+        conexion.execute("""
+            CREATE TABLE IF NOT EXISTS objetivos (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                usuario_id INTEGER NOT NULL,
+                habito TEXT NOT NULL,
+                intencion TEXT NOT NULL,
+                hito TEXT NOT NULL,
+                fecha_limite TEXT,
+                privacidad TEXT NOT NULL DEFAULT 'privado',
+                creado_en TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+                FOREIGN KEY (usuario_id)
+                    REFERENCES usuarios(id)
+                    ON DELETE CASCADE
+            )
+        """)
+
+        # Índice de objetivos por usuario
+        conexion.execute("""
+            CREATE INDEX IF NOT EXISTS idx_objetivos_usuario
+            ON objetivos(usuario_id)
         """)
