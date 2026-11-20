@@ -1,50 +1,88 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi perfil</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Moken · Mi perfil</title>
+    <link rel="stylesheet" href="/static/css/calendario.css">
     <link rel="stylesheet" href="/static/css/perfil.css">
+    <script defer src="/static/js/habitos.js"></script>
+    <script defer src="/static/js/perfil.js"></script>
 </head>
-<body>
-    <header class="perfil-header">
-        <a href="/">Inicio</a>
-        <nav>
-            <a href="/perfil.html" aria-current="page">Mi perfil</a>
-            <a href="/general.html">Volver</a>
+<body class="espacio">
+    <aside class="lateral">
+        <a class="marca" href="/general.html">Moken</a>
+        <nav aria-label="Tu espacio">
+            <span class="rotulo">Tu espacio</span>
+            <a href="/general.html">▦ <span>Proceso</span></a>
+            <a href="/calendario.html">▤ <span>Calendario</span></a>
+            <a href="/perfil.html" aria-current="page">♙ <span>Mi perfil</span></a>
         </nav>
-    </header>
-
-    <main class="perfil-container">
-        <section class="perfil-card">
-            <h1>Mi perfil</h1>
-            <p>Consulta y actualiza tus datos personales.</p>
-
-            <form id="perfil-form">
-                <label for="nombre">Nombre completo</label>
-                <input id="nombre" name="nombre"
-                       type="text" maxlength="100" required>
-
-                <label for="correo">Correo electrónico</label>
-                <input id="correo" name="correo"
-                       type="email" maxlength="254" required>
-
-                <label for="telefono">Teléfono (opcional)</label>
-                <input id="telefono" name="telefono"
-                       type="tel" maxlength="25">
-
-                <button type="submit">Guardar cambios</button>
-                <p id="mensaje" role="status" aria-live="polite"></p>
-            </form>
+        <div class="ritmo">
+            <strong>A tu ritmo.</strong>
+            <p>Tu proceso no te define. Cada pequeño paso también es un avance.</p>
+        </div>
+        <button id="salir" type="button">Cerrar sesión</button>
+    </aside>
+    <main>
+        <header class="cabecera">
+            <div><h1>Mi perfil</h1><p>Un espacio a tu medida, con el control siempre en tus manos.</p></div>
+            <span class="cuenta" id="cuenta">Mi perfil</span>
+        </header>
+        <section class="tarjeta identidad" aria-label="Perfil personal">
+            <span class="iniciales" id="iniciales" aria-hidden="true"></span>
+            <div><h2 id="nombre-visible">Tu perfil personal</h2><p>Tu espacio personal en Moken.</p></div>
         </section>
+        <div class="columnas-perfil">
+            <div class="pila">
+                <section class="tarjeta">
+                    <h2>Datos personales</h2>
+                    <p>Cómo quieres que te llamemos y dónde contactarte.</p>
+                    <form id="perfil-form">
+                        <fieldset class="campos-perfil" disabled>
+                            <label>Nombre completo
+                                <input id="nombre" name="nombre" autocomplete="name" minlength="2" maxlength="100" required>
+                            </label>
+                            <label>Teléfono (opcional)
+                                <input id="telefono" name="telefono" type="tel" autocomplete="tel" maxlength="25">
+                            </label>
+                            <label class="campo-ancho">Correo electrónico
+                                <input id="correo" name="correo" type="email" autocomplete="email" maxlength="254" required>
+                            </label>
+                        </fieldset>
+                    </form>
+                </section>
+                <section class="tarjeta">
+                    <h2>Privacidad y bienestar</h2>
+                    <p>Tus notas y registros diarios están asociados a tu cuenta.</p>
+                    <a class="enlace-verde" href="/calendario.html">Ver mis registros →</a>
+                </section>
+                <section class="tarjeta fila-accion">
+                    <div><h2>Seguridad de la cuenta</h2><p>Sesión actual en este navegador.</p></div>
+                    <button class="secundario" id="cerrar-sesion-perfil" type="button">Cerrar sesión</button>
+                </section>
+            </div>
+            <div class="pila">
+                <section class="tarjeta destacada">
+                    <h2>Tu proceso actual</h2>
+                    <h3 id="habito-perfil">Cargando objetivo…</h3>
+                    <p id="meta-perfil"></p>
+                    <a class="enlace-verde" href="/general.html#mis-objetivos">Ver o ajustar desde Proceso →</a>
+                </section>
+                <section class="tarjeta">
+                    <h2>Tus datos, tu decisión</h2>
+                    <p>Descarga una copia de tu perfil, tus objetivos y tus registros diarios.</p>
+                    <button class="secundario" id="descargar" type="button" disabled>Descargar mis datos</button>
+                </section>
+            </div>
+        </div>
+        <footer class="tarjeta fila-accion guardar-perfil">
+            <p id="mensaje" role="status" aria-live="polite">Los cambios se aplican al guardar.</p>
+            <div class="grupo-acciones">
+                <button class="secundario" id="cancelar" type="button" disabled>Cancelar</button>
+                <button class="primario" form="perfil-form" type="submit" id="guardar" disabled>Guardar cambios</button>
+            </div>
+        </footer>
     </main>
-
-    <footer class="perfil-footer">
-        <p>Mi perfil de usuario</p>
-    </footer>
-
-    <script src="/static/js/perfil.js"></script>
 </body>
 </html>

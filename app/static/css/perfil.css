@@ -1,93 +1,46 @@
-
-/* Perfil de usuario */
-
-.perfil-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 6%;
+.espacio main { min-width: 0; align-self: start; margin-top: 0; }
+.espacio main > section, .espacio main > div { margin-bottom: 22px; }
+.espacio h2 { font-size: 1.35rem; margin-bottom: 6px; }
+.espacio .resumen h2 { font-size: .72rem; margin-bottom: 0; }
+.espacio .tarjeta p { overflow-wrap: anywhere; }
+.espacio .cuenta { overflow-wrap: anywhere; max-width: 45%; }
+.columnas-perfil { display: grid; grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr); gap: 22px; }
+.pila { display: grid; align-content: start; gap: 22px; min-width: 0; }
+.identidad, .fila-accion, .grupo-acciones { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.fila-accion { justify-content: space-between; }
+.iniciales { display: grid; place-items: center; width: 75px; height: 75px; border-radius: 50%; background: var(--menta); color: #385342; font-size: 1.5rem; font-weight: 750; }
+.destacada { background: var(--menta); border-color: transparent; }
+.destacada h3 { margin: 14px 0 4px; overflow-wrap: anywhere; }
+.ceja { text-transform: uppercase; font-size: .72rem; font-weight: 750; letter-spacing: .03em; }
+.campos-perfil { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 20px; }
+.campo-ancho { grid-column: 1 / -1; }
+.espacio form label { font-size: .86rem; font-weight: 700; display: block; }
+.espacio form input, .espacio form textarea {
+    display: block; width: 100%; margin-top: 6px; padding: 10px 12px;
+    border: 1px solid var(--borde); border-radius: 12px; background: var(--suave);
+    color: inherit; font: inherit; font-weight: 400;
 }
-
-.perfil-header nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
+.espacio .campo { margin: 11px 0; }
+.enlace-verde { display: inline-block; margin-top: 16px; color: #405d48; text-decoration: underline; text-underline-offset: 3px; font-weight: 700; }
+.secundario, .espacio .evento-item button, .espacio #cancelar-edicion, .espacio #recargar-eventos {
+    color: #405d48; background: #fff; border: 1px solid var(--borde);
+    border-radius: 999px; padding: 8px 14px; font: inherit; font-weight: 700;
 }
+#descargar { margin-top: 14px; }
+.espacio button:disabled { opacity: .55; }
+.espacio .paneles > section { min-width: 0; }
+.espacio .calendario-header { align-items: center; gap: 8px; flex-wrap: wrap; }
+.espacio .evento-item { margin-top: 12px; padding: 14px; }
+.espacio .evento-item button { margin: 8px 8px 0 0; }
+.objetivo-item { padding: 14px 0; }
+.objetivo-item + .objetivo-item { border-top: 1px solid var(--borde); }
+.objetivo-item h3 { overflow-wrap: anywhere; }
+.objetivo-item small { color: var(--texto-secundario); }
 
-.perfil-header a {
-    text-decoration: none;
+@media (max-width: 900px) {
+    .columnas-perfil { grid-template-columns: 1fr; }
 }
-
-.perfil-container {
-    width: min(90%, 680px);
-    margin: 40px auto;
-}
-
-.perfil-card {
-    padding: 30px;
-    border: 1px solid #dddddd;
-    border-radius: 14px;
-    background: #ffffff;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-}
-
-.perfil-card h1 {
-    margin-top: 0;
-}
-
-#perfil-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-#perfil-form label {
-    margin-top: 10px;
-    font-weight: 600;
-}
-
-#perfil-form input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px;
-    border: 1px solid #cccccc;
-    border-radius: 7px;
-    font: inherit;
-}
-
-#perfil-form input:focus {
-    outline: 2px solid #555555;
-    outline-offset: 2px;
-}
-
-#perfil-form button {
-    margin-top: 18px;
-    padding: 13px;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    font: inherit;
-    font-weight: 600;
-}
-
-#perfil-form button:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.perfil-footer {
-    padding: 20px;
-    text-align: center;
-}
-
-@media (max-width: 480px) {
-    .perfil-header {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .perfil-card {
-        padding: 20px;
-    }
+@media (max-width: 500px) {
+    .campos-perfil { grid-template-columns: 1fr; }
+    .espacio .cabecera { align-items: flex-start; }
 }

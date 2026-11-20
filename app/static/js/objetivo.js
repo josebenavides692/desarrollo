@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const privacidad = document.getElementById("privacidad");
     const mensaje = document.getElementById("mensaje-objetivo");
     const botonGuardar = document.getElementById("guardar-objetivo");
+    const id = new URLSearchParams(window.location.search).get("id");
+    const ruta = id ? `/objetivos/${encodeURIComponent(id)}` : "/objetivos";
+    let fechaOriginal = "";
 
     // Mostrar u ocultar el campo de hábito personalizado.
     habito.addEventListener("change", () => {
@@ -35,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Validar que la fecha no sea anterior al día actual.
     function validarFecha(fecha) {
 
-        if (!fecha) {
+        if (!fecha || fecha === fechaOriginal) {
             return true;
         }
 
@@ -92,8 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-            const respuesta = await fetch("/objetivos", {
-                method: "POST",
+            const respuesta = await fetch(ruta, {
+                method: id ? "PUT" : "POST",
                 credentials: "same-origin",
                 headers: {
                     "Content-Type": "application/json"
@@ -114,14 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            mostrarMensaje(
-                "Objetivo guardado correctamente.",
-                "exito"
-            );
-
-            formulario.reset();
-            habitoPersonalizado.style.display = "none";
-            habitoPersonalizado.required = false;
+            window.location.assign("/general.html#mis-objetivos");
 
         } catch (error) {
 
@@ -141,5 +137,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     });
+
+    if (id) cargarObjetivo();
+
+    async function cargarObjetivo() {
+        document.querySelector("h1").textContent = "Editar objetivo";
+        botonGuardar.disabled = true;
+        try {
+            const respuesta = await fetch(ruta);
+            if (respuesta.status === 401) {
+                window.location.replace("/login.html");
+                return;
+            }
+            if (!respuesta.ok) throw new Error("No se pudo cargar el objetivo.");
+            const objetivo = await respuesta.json();
+            habito.value = objetivo.habito;
+            const personalizado = !habito.value || habito.value === "otro";
+            if (personalizado) habito.value = "otro";
+            habito.dispatchEvent(new Event("change"));
+            if (personalizado) habitoPersonalizado.value = objetivo.habito;
+            intencion.value = objetivo.intencion;
+            hito.value = objetivo.hito;
+            fechaOriginal = objetivo.fecha_limite || "";
+            fechaLimite.value = fechaOriginal;
+            privacidad.value = objetivo.privacidad;
+            botonGuardar.disabled = false;
+        } catch (error) {
+            mostrarMensaje(error.message);
+        }
+    }
 
 });

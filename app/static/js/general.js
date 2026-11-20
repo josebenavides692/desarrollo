@@ -46,6 +46,43 @@ document.addEventListener("DOMContentLoaded", async () => {
         nombreUsuario.textContent = usuario.nombre;
     }
 
+    async function cargarObjetivos() {
+        const lista = document.getElementById("lista-mis-objetivos");
+        try {
+            const { objetivos } = await solicitar("/objetivos");
+            const actual = objetivos[0];
+            document.getElementById("habito-actual").textContent =
+                actual ? nombreHabito(actual.habito) : "Aún sin objetivo";
+            document.getElementById("meta-actual").textContent =
+                actual ? `${actual.intencion} · ${actual.hito}` : "Elige el hábito que quieres trabajar y define tu primera meta.";
+            lista.replaceChildren();
+            if (!objetivos.length) {
+                lista.textContent = "Tus objetivos aparecerán aquí cuando guardes el primero.";
+            }
+            for (const objetivo of objetivos) {
+                const tarjeta = document.createElement("article");
+                tarjeta.className = "fila-accion objetivo-item";
+                const contenido = document.createElement("div");
+                const titulo = document.createElement("h3");
+                titulo.textContent = nombreHabito(objetivo.habito);
+                const meta = document.createElement("p");
+                meta.textContent = `${objetivo.intencion} · ${objetivo.hito}`;
+                const fecha = document.createElement("small");
+                fecha.textContent = objetivo.fecha_limite ? `Fecha límite: ${objetivo.fecha_limite}` : "Sin fecha límite";
+                const editar = document.createElement("a");
+                editar.href = `/objetivo.html?id=${encodeURIComponent(objetivo.id)}`;
+                editar.className = "secundario";
+                editar.textContent = "Editar";
+                editar.setAttribute("aria-label", `Editar ${titulo.textContent}`);
+                contenido.append(titulo, meta, fecha);
+                tarjeta.append(contenido, editar);
+                lista.append(tarjeta);
+            }
+        } catch (error) {
+            lista.textContent = error.message;
+        }
+    }
+
     // Consultar eventos del usuario
     async function cargarEventos() {
         listaEventos.textContent = "Cargando eventos...";
@@ -271,7 +308,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Inicialización
     try {
         await cargarUsuario();
-        await cargarEventos();
+        await Promise.all([cargarEventos(), cargarObjetivos()]);
 
     } catch (error) {
         console.error(error);
