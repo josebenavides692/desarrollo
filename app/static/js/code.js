@@ -1,11 +1,10 @@
-document.addEventListener("DOMContentLoaded", async () => {
 
+document.addEventListener("DOMContentLoaded", async () => {
     const bienvenida = document.getElementById("bienvenida");
     const botonLogin = document.getElementById("boton-login");
     const botonRegistro = document.getElementById("boton-registro");
     const botonSalir = document.getElementById("boton-salir");
 
-    // Comprobar si existe una sesión
     try {
         const respuesta = await fetch("/usuarios/me", {
             credentials: "same-origin"
@@ -25,9 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("No se pudo comprobar la sesión:", error);
     }
 
-    // Cerrar sesión
     botonSalir.addEventListener("click", async () => {
-
         try {
             const respuesta = await fetch("/logout", {
                 method: "POST",
@@ -44,7 +41,5 @@ document.addEventListener("DOMContentLoaded", async () => {
             console.error(error);
             alert("Error al cerrar sesión.");
         }
-
     });
-
 });
