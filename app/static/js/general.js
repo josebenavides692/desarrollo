@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Consultar la sesión mediante el perfil
     try {
-        const respuesta = await fetch("/usuario/me", {
+        const respuesta = await fetch("/usuarios/me", {
             credentials: "same-origin"
         });
 
