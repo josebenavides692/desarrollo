@@ -1,8 +1,9 @@
+
 import os
-from fastapi import FastAPI
-from app.models.database import inicializar_db
 from contextlib import asynccontextmanager
 from pathlib import Path
+
+from fastapi import FastAPI
 from starlette.middleware.sessions import SessionMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -10,6 +11,8 @@ from fastapi.staticfiles import StaticFiles
 from app.controllers.events_controller import router as events_router
 from app.controllers.auth_controller import router as auth_router
 from app.controllers.usuario_controller import router as usuario_router
+from app.models.database import inicializar_db
+
 
 BASE_DIR = Path(__file__).resolve().parent
 VIEWS_DIR = BASE_DIR / "app" / "views"
@@ -22,7 +25,6 @@ SESSION_SECRET = os.getenv(
 if SESSION_SECRET == "CAMBIAR-ESTA-CLAVE-ANTES-DE-PUBLICAR-MOKEN":
     print("ADVERTENCIA: configura SESSION_SECRET_KEY antes de publicar.")
 
-PASSWORD_ITERATIONS = 2**14
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -32,17 +34,19 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+# Registro de controladores
 app.include_router(events_router)
 app.include_router(auth_router)
 app.include_router(usuario_router)
 
+# Archivos estáticos
 app.mount(
     "/static",
     StaticFiles(directory=str(BASE_DIR / "app" / "static")),
     name="static"
 )
 
-
+# Sesiones
 app.add_middleware(
     SessionMiddleware,
     secret_key=SESSION_SECRET,
@@ -51,12 +55,13 @@ app.add_middleware(
     https_only=os.getenv("ENVIRONMENT") == "production",
     max_age=60 * 60 * 8
 )
- 
 
+
+# Vistas
 @app.get("/")
 def home():
     return FileResponse(VIEWS_DIR / "principal.html")
-    
+
 
 @app.get("/principal.html")
 def pagina_principal():
