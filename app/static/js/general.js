@@ -74,8 +74,33 @@ document.addEventListener("DOMContentLoaded", async () => {
                 editar.className = "secundario";
                 editar.textContent = "Editar";
                 editar.setAttribute("aria-label", `Editar ${titulo.textContent}`);
+
+                const eliminar = document.createElement("button");
+                eliminar.type = "button";
+                eliminar.className = "secundario eliminar-objetivo";
+                eliminar.textContent = "Eliminar";
+                eliminar.setAttribute("aria-label", `Eliminar ${titulo.textContent}`);
+                eliminar.addEventListener("click", async () => {
+                    if (!window.confirm(`¿Quieres eliminar el objetivo «${titulo.textContent}»?`)) return;
+                    const aviso = document.getElementById("mensaje-objetivos");
+                    aviso.textContent = "";
+                    eliminar.disabled = true;
+                    try {
+                        await solicitar(`/objetivos/${encodeURIComponent(objetivo.id)}`, { method: "DELETE" });
+                        await cargarObjetivos();
+                        aviso.textContent = "Objetivo eliminado.";
+                        aviso.focus();
+                    } catch (error) {
+                        aviso.textContent = error.message;
+                        eliminar.disabled = false;
+                    }
+                });
+
+                const acciones = document.createElement("div");
+                acciones.className = "grupo-acciones";
+                acciones.append(editar, eliminar);
                 contenido.append(titulo, meta, fecha);
-                tarjeta.append(contenido, editar);
+                tarjeta.append(contenido, acciones);
                 lista.append(tarjeta);
             }
         } catch (error) {
