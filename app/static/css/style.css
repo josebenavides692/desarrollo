@@ -78,6 +78,7 @@ button {
 
 .l img, .r img {
   width: 100%;
+  height: auto;
   border-radius: 12px;
 }
 
@@ -302,6 +303,7 @@ body > h2 + p {
 
 .imagen-grupo img {
   width: 100%;
+  height: auto;
   border-radius: 12px;
 }
 
